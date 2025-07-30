@@ -1,0 +1,34 @@
+<svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 18 18"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            preserveAspectRatio="none"
+                            id="Vector_10"
+                            class="pointer-events-none"
+                          >
+                            <defs id="__122">
+                              <image
+                                href="images/public_15.png"
+                                id="def_0_0"
+                              ></image>
+                              <pattern
+                                width="18"
+                                height="18"
+                                patternUnits="userSpaceOnUse"
+                                id="def_1_0"
+                              >
+                                <use
+                                  href="#def_0_0"
+                                  transform="matrix(0.0225 0 0 0.0225 0 0)"
+                                  id="__123"
+                                ></use>
+                              </pattern>
+                            </defs>
+                            <path
+                              d="M18 0L0 0 0 18 18 18 18 0Z"
+                              id="Vector_11"
+                            ></path>
+                          </svg>

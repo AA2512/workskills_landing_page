@@ -1,0 +1,17 @@
+<svg
+              preserveAspectRatio="none"
+              id="Divider_1"
+              class="pointer-events-none"
+              width="343"
+              height="2"
+              viewBox="0 0 343 2"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M343 1.19531H0V0.195312H343V1.19531Z"
+                fill="#EAECF0"
+              ></path>
+            </svg>
