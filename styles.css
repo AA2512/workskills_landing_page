@@ -48,6 +48,13 @@
   font-weight: 500;
   cursor: pointer;
   transition: border-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  img {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 @media screen and (max-width: 768px) {
