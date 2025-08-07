@@ -121,3 +121,45 @@ body {
   background-color: #48bf84 !important;
   transform: scale(1.2) !important;
 }
+
+.life-at-workskills {
+  h1 {
+    font-size: 40px;
+    font-weight: 700;
+    span {
+        color: #48bf84
+    }
+  }
+}
+.scroller {
+  overflow: hidden;
+  height: 55vh;
+}
+
+/* small screens */
+@media (max-width: 600px){
+    .life-at-workskills {
+        h1 {
+            font-size: 20px;
+        }
+    }
+  .scroller { height: 45vh; }
+}
+
+.scroller__inner {
+  display: flex;
+  gap: 12px;
+  width:  max-content;
+  animation: scroll 40s linear infinite;
+}
+
+.scroller__inner img {
+  flex-shrink: 0;
+  height: 55vh;        
+  width: auto;
+  object-fit: contain; 
+}
+
+@keyframes scroll {
+  to { transform: translateX(-50%); }
+}

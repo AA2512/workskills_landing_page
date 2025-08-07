@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smooth scrolling banner</title>
+<style>
+
+.life-at-workskills {
+  h1 {
+    font-size: 40px;
+    font-weight: 700;
+    span {
+        color: #48bf84
+    }
+  }
+}
+.scroller {
+  overflow: hidden;
+  height: 50vh;
+}
+
+/* small screens */
+@media (max-width: 600px){
+    .life-at-workskills {
+        h1 {
+            font-size: 20px;
+        }
+    }
+  .scroller { height: 45vh; }
+}
+
+.scroller__inner {
+  display: flex;
+  gap: 12px;
+  width:  max-content;
+  animation: scroll 40s linear infinite;
+}
+
+.scroller__inner img {
+  flex-shrink: 0;
+  height: 50vh;        
+  width: auto;
+  object-fit: contain; 
+}
+
+@keyframes scroll {
+  to { transform: translateX(-50%); }
+}
+</style>
+</head>
+<body>
+  <div class="life-at-workskills">
+    <h1>Life at <span>Workskills HQ</span></h1>
+    <div class="scroller">
+        <div class="scroller__inner">
+        <img src="images/home/Frame 2085663407.png" alt="Workskills collage">
+        <img src="images/home/Frame 2085663407.png" alt="">
+        </div>
+    </div>
+  </div>
+</body>
+</html>
