@@ -92,7 +92,7 @@ body {
   height: 100%;
 }
 
-.swiper-slide {
+.swiper .swiper-slide {
   text-align: center;
   font-size: 18px;
   background: #444;
@@ -101,14 +101,14 @@ body {
   align-items: center;
 }
 
-.swiper-slide img {
+.swiper .swiper-slide img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.swiper-pagination-bullet {
+.swiper .swiper-pagination-bullet {
   background-color: rgba(72, 191, 132, 0.3) !important;
   opacity: 1 !important;
   width: 12px !important;
@@ -117,11 +117,11 @@ body {
   transition: all 0.3s ease !important;
 }
 
-.swiper-pagination-bullet-active {
+.swiper .swiper-pagination-bullet-active {
   background-color: #48bf84 !important;
   transform: scale(1.2) !important;
 }
-
+/* 
 .life-at-workskills {
   h1 {
     font-size: 40px;
@@ -136,7 +136,7 @@ body {
   height: 55vh;
 }
 
-/* small screens */
+
 @media (max-width: 600px){
     .life-at-workskills {
         h1 {
@@ -162,4 +162,66 @@ body {
 
 @keyframes scroll {
   to { transform: translateX(-50%); }
+} */
+
+.scroller {
+  overflow: hidden;
+  height: 50vh;
+}
+
+/* small screens */
+@media (max-width: 600px){
+  .scroller { height: 45vh; }
+}
+
+.scroller__inner {
+  display: flex;
+  /* width: max-content; */
+  animation: scroll 3s linear infinite;
+  /* gap: 12px; */
+}
+
+.scroller__inner img {
+  /* flex-shrink: 0; */
+  flex:0 0 100vw; 
+  height: 50vh;        
+  width: auto;
+  object-fit: cover;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100vw); }
+}
+
+.life-at-hq-swiper-container {
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+  margin-top: -3rem;
+}
+
+/* small screens */
+@media (max-width: 600px){
+  .life-at-hq-swiper-container { height: 45vh; margin-top: 0px; }
+}
+
+.life-at-hq-swiper-container .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto !important;
+  flex-shrink: 0;
+}
+
+.life-at-hq-swiper-container .swiper-slide img {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  max-width: none;
+}
+
+/* Custom styles for continuous scrolling effect */
+.life-at-hq-swiper-container .swiper-wrapper {
+  transition-timing-function: linear !important;
 }

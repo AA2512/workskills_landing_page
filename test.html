@@ -2,61 +2,120 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Smooth scrolling banner</title>
+<title>Smooth scrolling banner with Swiper</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <style>
-
 .life-at-workskills {
-  h1 {
-    font-size: 40px;
-    font-weight: 700;
-    span {
-        color: #48bf84
-    }
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.life-at-workskills h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+}
+
+.life-at-workskills h1 span {
+  color: #48bf84;
+}
+
+@media (max-width: 600px){
+  .life-at-workskills h1 {
+    font-size: 20px;
   }
 }
-.scroller {
-  overflow: hidden;
+
+.life-at-hq-swiper-container {
+  width: 100%;
   height: 50vh;
+  overflow: hidden;
 }
 
 /* small screens */
 @media (max-width: 600px){
-    .life-at-workskills {
-        h1 {
-            font-size: 20px;
-        }
-    }
-  .scroller { height: 45vh; }
+  .life-at-hq-swiper-container { height: 45vh; }
 }
 
-.scroller__inner {
+.life-at-hq-swiper-container .swiper-slide {
   display: flex;
-  gap: 12px;
-  width:  max-content;
-  animation: scroll 40s linear infinite;
-}
-
-.scroller__inner img {
+  justify-content: center;
+  align-items: center;
+  width: auto !important;
   flex-shrink: 0;
-  height: 50vh;        
-  width: auto;
-  object-fit: contain; 
 }
 
-@keyframes scroll {
-  to { transform: translateX(-50%); }
+.life-at-hq-swiper-container .swiper-slide img {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  max-width: none;
+}
+
+/* Custom styles for continuous scrolling effect */
+.life-at-hq-swiper-container .swiper-wrapper {
+  transition-timing-function: linear !important;
 }
 </style>
 </head>
-<body>
+  <body>
   <div class="life-at-workskills">
     <h1>Life at <span>Workskills HQ</span></h1>
-    <div class="scroller">
-        <div class="scroller__inner">
-        <img src="images/home/Frame 2085663407.png" alt="Workskills collage">
-        <img src="images/home/Frame 2085663407.png" alt="">
+    
+    <!-- Swiper -->
+    <div class="life-at-hq-swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="images/home/Frame 2085663407.png" alt="Workskills collage">
         </div>
+        <div class="swiper-slide">
+          <img src="images/home/Frame 2085663407.png" alt="Workskills collage">
+        </div>
+        <div class="swiper-slide">
+          <img src="images/home/Frame 2085663407.png" alt="Workskills collage">
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.life-at-hq-swiper-container', {
+      // Enable continuous loop mode
+      loop: true,
+      
+      // Autoplay configuration
+      autoplay: {
+        delay: 0, // Minimal delay for smooth continuous motion
+        disableOnInteraction: false,
+        reverseDirection: false,
+      },
+      
+      // Smooth continuous scrolling
+      speed: 10000, // Fast transition for smooth continuous effect
+      
+      // Enable free mode for smooth continuous scrolling
+      freeMode: {
+        enabled: true,
+        momentum: false,
+      },
+      
+      // Auto width slides to fit image dimensions
+      slidesPerView: 'auto',
+      centeredSlides: false,
+      
+      // Space between slides
+      spaceBetween: 12,
+      
+      // Disable user interactions
+      allowTouchMove: false,
+      allowSlideNext: true,
+      allowSlidePrev: true,
+      
+      // Ensure smooth transitions
+      effect: 'slide',
+    });
+  </script>
 </body>
 </html>
