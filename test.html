@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Smooth scrolling banner with Swiper</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+link:
 <style>
 .life-at-workskills {
   text-align: center;
@@ -61,61 +62,64 @@
   <body>
   <div class="life-at-workskills">
     <h1>Life at <span>Workskills HQ</span></h1>
+    <!-- <div class="swiper mySwiper2">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">Slide 1</div>
+          <div class="swiper-slide">Slide 2</div>
+          <div class="swiper-slide">Slide 3</div>
+          <div class="swiper-slide">Slide 4</div>
+          <div class="swiper-slide">Slide 5</div>
+          <div class="swiper-slide">Slide 6</div>
+          <div class="swiper-slide">Slide 7</div>
+          <div class="swiper-slide">Slide 8</div>
+          <div class="swiper-slide">Slide 9</div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
     
-    <!-- Swiper -->
-    <div class="life-at-hq-swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="images/home/Frame 2085663407.png" alt="Workskills collage">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/home/Frame 2085663407.png" alt="Workskills collage">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/home/Frame 2085663407.png" alt="Workskills collage">
+  </div> -->
+  <div class="swiper mySwiper2">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="image pointer-events-none"></div>
+        <div class="frame-34">
+          <div class="avatar-52">
+            <div class="background pointer-events-none">
+              <img src="images/program_page_digital_marketing/h%3D94.jpg" alt="Background" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <div class="frame-25">
+            <span class="name text">Sarah Johnson</span>
+            <span class="title text">Assistant Manager, Astra Microwave Products Limited</span>
+          </div>
         </div>
       </div>
+  
+      <div class="swiper-slide">
+        <!-- repeat slide content -->
+      </div>
     </div>
+  
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
   </div>
-
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-    const swiper = new Swiper('.life-at-hq-swiper-container', {
-      // Enable continuous loop mode
-      loop: true,
-      
-      // Autoplay configuration
-      autoplay: {
-        delay: 0, // Minimal delay for smooth continuous motion
-        disableOnInteraction: false,
-        reverseDirection: false,
-      },
-      
-      // Smooth continuous scrolling
-      speed: 10000, // Fast transition for smooth continuous effect
-      
-      // Enable free mode for smooth continuous scrolling
-      freeMode: {
-        enabled: true,
-        momentum: false,
-      },
-      
-      // Auto width slides to fit image dimensions
-      slidesPerView: 'auto',
-      centeredSlides: false,
-      
-      // Space between slides
-      spaceBetween: 12,
-      
-      // Disable user interactions
-      allowTouchMove: false,
-      allowSlideNext: true,
-      allowSlidePrev: true,
-      
-      // Ensure smooth transitions
-      effect: 'slide',
-    });
+    var swiper = new Swiper(".mySwiper2", {
+    // autoplay: {
+    //   delay: 2500,
+    //   disableOnInteraction: false,
+    // },
+    // loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      dynamicBullets: true,
+    },
+  });
   </script>
 </body>
 </html>
