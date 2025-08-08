@@ -1,120 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>Smooth scrolling banner with Swiper</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <style>
-.life-at-workskills {
-  text-align: center;
-  margin-bottom: 20px;
-}
+.life-at-workskills { text-align:center; margin-bottom:20px; }
+.life-at-workskills h1 { font-size:40px; font-weight:700; margin:0 0 20px 0; }
+.life-at-workskills h1 span { color:#48bf84; }
+@media (max-width: 600px){ .life-at-workskills h1 { font-size:20px; } }
 
-.life-at-workskills h1 {
-  font-size: 40px;
-  font-weight: 700;
-  margin: 0 0 20px 0;
-}
-
-.life-at-workskills h1 span {
-  color: #48bf84;
-}
-
-@media (max-width: 600px){
-  .life-at-workskills h1 {
-    font-size: 20px;
-  }
-}
-
-.life-at-hq-swiper-container {
-  width: 100%;
-  height: 50vh;
-  overflow: hidden;
-}
-
-/* small screens */
-@media (max-width: 600px){
-  .life-at-hq-swiper-container { height: 45vh; }
-}
+.life-at-hq-swiper-container { width:100%; height:50vh; overflow:hidden; }
+@media (max-width: 600px){ .life-at-hq-swiper-container { height:45vh; } }
 
 .life-at-hq-swiper-container .swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: auto !important;
-  flex-shrink: 0;
+  display:flex; justify-content:center; align-items:center;
+  width:auto !important; flex-shrink:0;
 }
 
 .life-at-hq-swiper-container .swiper-slide img {
-  width: auto;
-  height: 100%;
-  object-fit: contain;
-  max-width: none;
+  width:auto; height:100%; object-fit:contain; max-width:none;
 }
 
-/* Custom styles for continuous scrolling effect */
-.life-at-hq-swiper-container .swiper-wrapper {
-  transition-timing-function: linear !important;
+/* Smooth linear motion */
+.life-at-hq-swiper-container .swiper-slide,
+.life-at-hq-swiper-container .swiper-slide img {
+  pointer-events: none;
+  user-select: none;
 }
 </style>
 </head>
-  <body>
+<body>
   <div class="life-at-workskills">
     <h1>Life at <span>Workskills HQ</span></h1>
-    
-    <!-- Swiper -->
     <div class="life-at-hq-swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <img src="images/home/Frame 2085663407.png" alt="Workskills collage">
+          <img src="images/home/Frame 2085663407.png" alt="Workskills collage" />
         </div>
         <div class="swiper-slide">
-          <img src="images/home/Frame 2085663407.png" alt="Workskills collage">
+          <img src="images/home/Frame 2085663407.png" alt="Workskills collage" />
         </div>
         <div class="swiper-slide">
-          <img src="images/home/Frame 2085663407.png" alt="Workskills collage">
+          <img src="images/home/Frame 2085663407.png" alt="Workskills collage" />
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
+    // const swiper = new Swiper('.life-at-hq-swiper-container', {
+    //   loop: true,
+  
+    //   // Smooth continuous scroll
+    //   speed: 10000,                 // long duration for a slow, steady pan
+    //   slidesPerView: 'auto',
+    //   centeredSlides: false,
+    //   spaceBetween: 12,
+  
+    //   // Autoplay that never gives up
+    //   autoplay: {
+    //     delay: 1,                   // use 1ms instead of 0 to avoid pause bug
+    //     disableOnInteraction: false,
+    //     pauseOnMouseEnter: false,
+    //     stopOnLastSlide: false,
+    //     waitForTransition: false,
+    //   },
+  
+    //   // Nuke all interactions so Swiper never thinks you interacted
+    //   allowTouchMove: false,
+    //   simulateTouch: false,
+    //   touchRatio: 0,
+    //   preventClicks: true,
+    //   preventClicksPropagation: true,
+  
+    //   // Just a normal slide effect
+    //   effect: 'slide',
+    // });
+  
+    // // Belt & suspenders: if the tab was hidden or anything paused autoplay, kick it
+    // document.addEventListener('visibilitychange', () => {
+    //   if (document.visibilityState === 'visible') {
+    //     try { swiper.autoplay.start(); } catch (_) {}
+    //   }
+    // });
+    
+  </script>
+  <script>
+    // 1) Clone slides so the track is long enough for true infinite scroll
+    const wrapper = document.querySelector('.life-at-hq-swiper-container .swiper-wrapper');
+    const container = document.querySelector('.life-at-hq-swiper-container');
+    const originals = Array.from(wrapper.children);
+  
+    // Keep duplicating until we have ~3x viewport width of content
+    function ensureLength() {
+      let guard = 0;
+      while (wrapper.scrollWidth < container.offsetWidth * 3 && guard < 10) {
+        originals.forEach(s => wrapper.appendChild(s.cloneNode(true)));
+        guard++;
+      }
+    }
+    ensureLength();
+  
+    // 2) Init Swiper with loop that never gives up
     const swiper = new Swiper('.life-at-hq-swiper-container', {
-      // Enable continuous loop mode
       loop: true,
-      
-      // Autoplay configuration
-      autoplay: {
-        delay: 0, // Minimal delay for smooth continuous motion
-        disableOnInteraction: false,
-        reverseDirection: false,
-      },
-      
-      // Smooth continuous scrolling
-      speed: 10000, // Fast transition for smooth continuous effect
-      
-      // Enable free mode for smooth continuous scrolling
-      freeMode: {
-        enabled: true,
-        momentum: false,
-      },
-      
-      // Auto width slides to fit image dimensions
+      // Make loop robust when slidesPerView is "auto"
+      loopAdditionalSlides: 20,
+      loopedSlides: wrapper.querySelectorAll('.swiper-slide').length,
+      watchOverflow: false,
+  
       slidesPerView: 'auto',
-      centeredSlides: false,
-      
-      // Space between slides
       spaceBetween: 12,
-      
-      // Disable user interactions
+      centeredSlides: false,
+  
+      speed: 10000, // slow, steady pan
+  
+      autoplay: {
+        delay: 1,                   // use 1ms instead of 0
+        disableOnInteraction: false,
+        pauseOnMouseEnter: false,
+        stopOnLastSlide: false,
+        waitForTransition: false,
+      },
+  
+      // Nuke interactions so autoplay never pauses
       allowTouchMove: false,
-      allowSlideNext: true,
-      allowSlidePrev: true,
-      
-      // Ensure smooth transitions
+      simulateTouch: false,
+      touchRatio: 0,
+      preventClicks: true,
+      preventClicksPropagation: true,
+  
       effect: 'slide',
+    });
+  
+    // 3) Belts & suspenders: if anything stops it, kick it
+    swiper.on('autoplayStop', () => swiper.autoplay.start());
+    swiper.on('reachEnd', () => swiper.slideToLoop(0, 0, false));
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') swiper.autoplay.start();
     });
   </script>
 </body>
