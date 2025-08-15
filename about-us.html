@@ -106,10 +106,15 @@
           </div>
         </div>
       </div>
-      <div style="margin-bottom: 60px;">
-        <img src="images/home/Frame 2085663407-min.png" height="300px" />
+      
+      <div class="life_hq_2" style="margin-top: -20px;">
+        <div class="life_hq__track_2" id="track-2">
+          <img class="life_hq__img_2" src="images/home/Frame 2085663407-min.png" alt="">
+          <img class="life_hq__img_2" src="images/home/Frame 2085663407-min.png" alt="">
+          <img class="life_hq__img_2" src="images/home/Frame 2085663407-min.png" alt="">
+        </div>
       </div>
-      <div id="Section">
+      <div id="Section" style="padding-top: 40px;">
         <div id="Container_2">
           <div id="Content_0">
             <div id="Rich_text">
@@ -463,10 +468,17 @@
           </div>
         </div>
       </div>
-      <div style="margin-bottom: 80px;">
+      <!-- <div style="margin-bottom: 80px;">
         <img src="images/home/Frame 2085663407-min.png" height="450px" />
+      </div> -->
+      <div class="life_hq">
+        <div class="life_hq__track" id="track_1">
+          <img class="life_hq__img" src="images/home/Frame 2085663407-min.png" alt="">
+          <img class="life_hq__img" src="images/home/Frame 2085663407-min.png" alt="">
+          <img class="life_hq__img" src="images/home/Frame 2085663407-min.png" alt="">
+        </div>
       </div>
-      <div id="Section_6">
+      <div id="Section_6"  style="padding-top: 40px;">
         <div id="Container_14">
           <div id="Content_7">
             <div id="Rich_text_0">
@@ -815,4 +827,52 @@
       </div>
     </div>
    </div>
-</body></html>
+</body>
+<script>
+  const track1= document.getElementById('track_1');
+  let offset = 0;
+  const speed = 1;
+
+  function scroll() {
+    offset -= speed;
+    track1.style.transform = `translateX(${offset}px)`;
+
+    const firstImg = track1.children[0];
+    const gap = parseFloat(getComputedStyle(track1).gap) || 0;
+    const firstImgWidth = firstImg.offsetWidth + gap;
+
+    if (-offset >= firstImgWidth) {
+      track1.appendChild(firstImg);
+      offset += firstImgWidth;
+    }
+
+    requestAnimationFrame(scroll);
+  }
+
+  scroll();
+
+  const track2= document.getElementById('track-2');
+  let offset2 = 0;
+  const speed2 = 1;
+
+  console.log(track2)
+
+  function scroll2() {
+    offset2 -= speed2;
+    track2.style.transform = `translateX(${offset2}px)`;
+    console.log("HERE")
+
+    const firstImg = track2.children[0];
+    const gap = parseFloat(getComputedStyle(track2).gap) || 0;
+    const firstImgWidth = firstImg.offsetWidth + gap;
+    if (-offset2 >= firstImgWidth) {
+      track2.appendChild(firstImg);
+      offset2 += firstImgWidth;
+    }
+
+    requestAnimationFrame(scroll2);
+  }
+
+  scroll2()
+</script>
+</html>

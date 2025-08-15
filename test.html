@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>JS Infinite Horizontal Scroll</title>
+<style>
+
+  .life_hq {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    background: white;
+    display: flex;
+    align-items: center;
+  }
+
+  .life_hq__track {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    will-change: transform;
+  }
+
+  .life_hq__img {
+    height: 260px;
+    flex: 0 0 auto;
+    object-fit: cover;
+    pointer-events: none;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="life_hq">
+  <div class="life_hq__track" id="track">
+    <img class="life_hq__img" src="images/home/Frame 2085663407-min.png" alt="">
+    <img class="life_hq__img" src="images/home/Frame 2085663407-min.png" alt="">
+    <img class="life_hq__img" src="images/home/Frame 2085663407-min.png" alt="">
+  </div>
+</div>
+
+<script>
+  const track = document.getElementById('track');
+  let offset = 0;
+  const speed = 1;
+
+  function scroll() {
+    offset -= speed;
+    track.style.transform = `translateX(${offset}px)`;
+
+    const firstImg = track.children[0];
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    const firstImgWidth = firstImg.offsetWidth + gap;
+
+    if (-offset >= firstImgWidth) {
+      track.appendChild(firstImg);
+      offset += firstImgWidth;
+    }
+
+    requestAnimationFrame(scroll);
+  }
+
+  scroll();
+</script>
+
+</body>
+</html>
