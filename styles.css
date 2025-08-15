@@ -231,7 +231,7 @@ body {
   display: grid !important;
   grid-template-columns: 1fr 1fr;
   gap: 35px;
-  padding: 30px;
+  padding: 30px 60px;
 }
 .hero-slide-left {
   display: grid;
