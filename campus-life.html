@@ -1032,12 +1032,10 @@
   let offset2 = 0;
   const speed2 = 1;
 
-  console.log(track2)
 
   function scroll2() {
     offset2 -= speed2;
     track2.style.transform = `translateX(${offset2}px)`;
-    console.log("HERE")
 
     const firstImg = track2.children[0];
     const gap = parseFloat(getComputedStyle(track2).gap) || 0;
