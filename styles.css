@@ -57,7 +57,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .sticky-cta-container {
     grid-template-columns: 1fr;
   }
@@ -171,7 +171,7 @@ body {
 }
 
 /* small screens */
-@media (max-width: 600px){
+@media (max-width: 1024px){
   .scroller { height: 45vh; }
 }
 
@@ -203,7 +203,7 @@ body {
 }
 
 /* small screens */
-@media (max-width: 600px){
+@media (max-width: 1024px){
   .life-at-hq-swiper-container { height: 45vh; margin-top: 0px; }
 }
 
