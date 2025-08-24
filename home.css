@@ -288,7 +288,7 @@ body {
 
 @media screen and (max-width: 768px) {
     .educators-section {
-        padding: 64px 24px;
+        padding: 64px 16px;
     }
     .educators-section .educators-title h1 {
         font-size: 36px;
