@@ -809,12 +809,17 @@ body {
   font-size: 18px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 500px;
   width: 100%;
   padding: 24px;
   margin-top: 60px;
+}
+
+.hero-mobile-slide {
+  display: flex;
+  justify-content: flex-end;
+  gap: 24px;
 }
 
 .hero-mobile-slide-1 {
@@ -825,6 +830,72 @@ body {
       rgba(10, 46, 54, 1) 90%
     ),
     url("images/home/heroImage01-min.png") center/cover no-repeat;
+  overflow: hidden;
+}
+
+.hero-mobile-slide-2 {
+  background: linear-gradient(
+      180deg,
+      rgba(10, 46, 54, 1) 0%,
+      rgba(10, 46, 54, 0) 10%,
+      rgba(10, 46, 54, 1) 90%
+    ),
+    url("images/home/heroImage02-min.png") center/cover no-repeat;
+  overflow: hidden;
+}
+
+.hero-mobile-slide-3 {
+  background: linear-gradient(
+      180deg,
+      rgba(10, 46, 54, 1) 0%,
+      rgba(10, 46, 54, 0) 10%,
+      rgba(10, 46, 54, 1) 90%
+    ),
+    url("images/home/heroImage03-min.png") center/cover no-repeat;
+  overflow: hidden;
+}
+
+.hero-mobile-slide-4 {
+  background: linear-gradient(
+      180deg,
+      rgba(10, 46, 54, 1) 0%,
+      rgba(10, 46, 54, 0) 10%,
+      rgba(10, 46, 54, 1) 90%
+    ),
+    url("images/home/heroImage04-min.png") center/cover no-repeat;
+  overflow: hidden;
+}
+
+.hero-mobile-slide-5 {
+  background: linear-gradient(
+      180deg,
+      rgba(10, 46, 54, 1) 0%,
+      rgba(10, 46, 54, 0) 10%,
+      rgba(10, 46, 54, 1) 90%
+    ),
+    url("images/home/heroImage05-min.png") center/cover no-repeat;
+  overflow: hidden;
+}
+
+.hero-mobile-slide-6 {
+  background: linear-gradient(
+      180deg,
+      rgba(10, 46, 54, 1) 0%,
+      rgba(10, 46, 54, 0) 10%,
+      rgba(10, 46, 54, 1) 90%
+    ),
+    url("images/home/heroImage06-min.png") center/cover no-repeat;
+  overflow: hidden;
+}
+
+.hero-mobile-slide-7 {
+  background: linear-gradient(
+      180deg,
+      rgba(10, 46, 54, 1) 0%,
+      rgba(10, 46, 54, 0) 10%,
+      rgba(10, 46, 54, 1) 90%
+    ),
+    url("images/home/heroImage07-min.png") center/cover no-repeat;
   overflow: hidden;
 }
 
