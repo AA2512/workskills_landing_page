@@ -21,6 +21,7 @@
 body {
   width: 100vw;
   height: 100%;
+  overflow-x: hidden;
   /* overflow: hidden; */
 }
 
@@ -33,10 +34,11 @@ body {
   z-index: 1000;
   background: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding-left: 86px;
+  padding-right: 86px;
 }
 
 .navbar-container {
-  max-width: 1440px;
   margin: 0 auto;
 }
 
@@ -265,6 +267,10 @@ body {
 
 /* Mobile responsive styles */
 @media screen and (max-width: 768px) {
+  .navbar {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
   .navbar-main {
     padding: 12px 16px;
   }
@@ -628,6 +634,7 @@ body {
 
 .hero-slide-right {
   justify-self: flex-end;
+  width: 100%;
 }
 
 .hero-slide-buttons {
@@ -638,12 +645,18 @@ body {
 
 .hero-slide-right img {
   border-radius: 20px;
+  width: 100%;
+}
+
+.hero-desktop-container {
+  padding-left: 60px;
+  padding-right: 60px;
 }
 
 .heroDesktopSwiper {
   width: 100%;
   /* height: 100%; */
-  margin: 0px 20px;
+  margin: 60px 20px;
   padding-left: 15px !important;
   padding-right: 15px !important;
   padding-top: 80px !important;
@@ -787,9 +800,9 @@ body {
   border-radius: 10px;
 }
 
-@media screen and (max-width: 1024px) {
-  .heroDesktopSwiper {
-    display: none !important;
+@media screen and (max-width: 1023px) {
+  .hero-desktop-container {
+    display: none;
   }
   .heroMobileSwiper {
     display: flex;
@@ -802,6 +815,7 @@ body {
   width: 100%;
   height: 100%;
   display: none;
+  margin-top: 50px;
 }
 
 .heroMobileSwiper .swiper-slide {
@@ -810,10 +824,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 500px;
+  height: 551px;
   width: 100%;
   padding: 24px;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 
 .hero-mobile-slide {
@@ -924,6 +938,7 @@ body {
   gap: 16px;
   flex-direction: column;
   width: 100%;
+  padding-bottom: 20px;
 }
 
 .heroMobileSwiper .swiper-slide .hero-mobile-btn-grp .hero-mobile-btn {
@@ -972,7 +987,7 @@ body {
   transform: scale(1.2) !important;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1023px) {
   .heroMobileSwiper {
     display: none !important;
   }
@@ -1901,7 +1916,9 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  max-width: 1200px;
+  /* max-width: 1200px; */
+  padding-left: 86px;
+  padding-right: 86px;
   margin-left: auto;
   margin-right: auto;
   a {
@@ -1963,6 +1980,8 @@ body {
 @media screen and (max-width: 768px) {
   .sticky-cta-container {
     grid-template-columns: 1fr;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .cta-content {
