@@ -1898,7 +1898,7 @@ body {
 
 @media screen and (max-width: 768px) {
   .footer-section {
-    padding-bottom: 200px;
+    padding-bottom: 230px;
   }
   .footer-section .footer-content {
     flex-direction: column;
@@ -1980,8 +1980,8 @@ body {
 @media screen and (max-width: 768px) {
   .sticky-cta-container {
     grid-template-columns: 1fr;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .cta-content {
