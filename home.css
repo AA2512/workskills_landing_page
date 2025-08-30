@@ -187,7 +187,7 @@ body {
   background: rgba(0, 0, 0, 0.5);
   z-index: 1002;
   display: none;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .mobile-programs-dialog.active {
@@ -197,7 +197,7 @@ body {
 .mobile-dialog-content {
   background: #fff;
   border-radius: 12px;
-  padding: 24px;
+  /* padding: 24px; */
   max-width: 320px;
   width: 100%;
   max-height: 80vh;
@@ -219,8 +219,8 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 16px 0;
-  border-bottom: 1px solid #f2f4f7;
+  padding: 10px 14px;
+  /* border-bottom: 1px solid #f2f4f7; */
   color: var(--Gray-900, #101828);
   font-family: Inter;
   font-size: 16px;
@@ -254,6 +254,7 @@ body {
   font-weight: 500;
   color: #667085;
   margin-bottom: 12px;
+  padding: 10px 14px;
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
@@ -265,6 +266,10 @@ body {
   flex-shrink: 0;
 }
 
+.nav-mobile-program-btn {
+  display: none;
+}
+
 /* Mobile responsive styles */
 @media screen and (max-width: 768px) {
   .navbar {
@@ -272,7 +277,22 @@ body {
     padding-right: 16px;
   }
   .navbar-main {
-    padding: 12px 16px;
+    padding: 12px 12px;
+  }
+
+  .nav-mobile-program-btn {
+    background-color: #48bf84;
+    color: white;
+    border: none;
+    padding: 12px 12px 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: Inter;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
   }
   
   .navbar-logo img {
@@ -341,7 +361,6 @@ body {
 .program-card {
   background: #fff;
   border-radius: 16px;
-  padding: 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid #f2f4f7;
   max-width: 391px;
@@ -361,7 +380,7 @@ body {
 
 .program-image {
   position: relative;
-  top: -50px;
+  /* top: -50px; */
 }
 
 .program-logo {
@@ -387,7 +406,7 @@ body {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 12px;
+  /* border-radius: 12px; */
 }
 
 .program-tags {
@@ -580,6 +599,13 @@ body {
   color: #dc2626;
 }
 
+.program-card-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 /* Mobile responsive styles for programs section */
 @media screen and (max-width: 768px) {  
   .programs-header {
@@ -606,6 +632,9 @@ body {
   
   .program-card {
     max-width: 100%;
+  }
+
+  .program-card-content {
     padding: 20px;
   }
   
@@ -824,9 +853,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 551px;
   width: 100%;
-  padding: 24px;
+  overflow: hidden;
   /* margin-top: 60px; */
 }
 
@@ -834,6 +862,46 @@ body {
   display: flex;
   justify-content: flex-end;
   gap: 24px;
+}
+
+.hero-mobile-slide-content-2 {
+  position: relative;
+  width: 100%;
+  .hero-mobile-slide-image {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+  }
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* overflow: hidden; */
+  }
+}
+
+.hero-mobile-slide-overlay {
+  filter: blur(53.2px);
+  background-color: #101828;
+  border-radius: 0;
+  width: calc(244px + 100%);
+  position: absolute;
+  top: 200px;
+  left: -100px;
+  right: -100px;
+  height: 400px;
+  z-index: 1;
+}
+
+.hero-mobile-slide-content-container {
+  position: relative;
+  /* left: -111%; */
+  z-index: 2;
+  background-color: #101828;
+  padding: 0px 24px 24px 24px;
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
 }
 
 .hero-mobile-slide-1 {
@@ -918,6 +986,7 @@ body {
   text-align: center;
   font-family: Inter;
   font-size: 24px;
+  margin-bottom: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: 32px; /* 133.333% */
@@ -930,6 +999,7 @@ body {
   font-size: 16px;
   font-style: normal;
   font-weight: 300;
+  margin-bottom: 20px;
   line-height: 24px; /* 150% */
 }
 
@@ -1512,6 +1582,9 @@ body {
     font-style: normal;
     font-weight: 600;
     line-height: 38px; /* 126.667% */
+  }
+  .features-section .features-title h1 .features-title-span {
+    display: none;
   }
 
   /* Mobile video player button sizes */
