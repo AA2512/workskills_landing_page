@@ -606,6 +606,7 @@
         padding-bottom: 8px;
         width: 100%;
         -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        flex-wrap: nowrap;
     }
 
     .filter-btn {
@@ -632,11 +633,13 @@
     .platform-stats {
         gap: 12px;
         margin-bottom: 24px;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
     }
 
     .platform-stat {
         padding: 8px 12px;
-        min-width: 100px;
+        /* min-width: 100px; */
         flex: 1;
     }
 
