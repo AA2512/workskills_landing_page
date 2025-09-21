@@ -1,134 +1,199 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Placements</title>
-  <style>
-    body { font-family: Arial, sans-serif; }
-    .filters {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1rem;
-    }
-    .card {
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: #f8fef8;
-    }
-    .card img.profile {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      margin-bottom: 0.5rem;
-    }
-    .card img.logo {
-      width: 80px;
-      height: auto;
-      margin-top: 0.5rem;
-    }
-    .name { font-weight: bold; }
-    .role { font-size: 0.9rem; color: #666; }
-  </style>
-</head>
-<body>
-  <h1>Placements</h1>
+<div class="journey-steps">
+  <h1>5 Step Journey to get Dream Job</h1>
 
-  <!-- Filters -->
-  <div class="filters">
-    <select id="yearFilter">
-      <option value="all">Year of Graduation</option>
-    </select>
-    <select id="degreeFilter">
-      <option value="all">Degree</option>
-    </select>
-  </div>
+  <ul class="steps">
+    <!-- STEP 1 -->
+    <li class="step step-1">
+      <div class="badge">1</div>
+      <div class="content">
+        <div class="text">
+          <h3>Job Portal with 500+ listing</h3>
+          <p>Access 500+ verified job and internship listings tailored to your skill set.</p>
+        </div>
+        <div class="media">
+          <img src="images/program_page/Phase 4 - Job Assistance/jobPortalwith500+listing.png" alt="Listings preview" />
+        </div>
+      </div>
+    </li>
 
-  <!-- Placement Cards -->
-  <div id="placements" class="cards"></div>
+    <!-- STEP 2 -->
+    <li class="step step-2">
+      <div class="badge">2</div>
+      <div class="content">
+        <div class="text">
+          <h3>Dedicated Placement officer</h3>
+          <p>Get hands-on help, HR contact lists, and personalized application support.</p>
+        </div>
+        <div class="media">
+          <img src="images/program_page/Phase 4 - Job Assistance/dedicatedPlacementofficer.png" alt="Placement officer helping student" />
+        </div>
+      </div>
+    </li>
 
-  <script>
-    let placementsData = [];
+    <!-- STEP 3 -->
+    <li class="step step-3">
+      <div class="badge">3</div>
+      <div class="content">
+        <div class="text">
+          <h3>Referral Interviews from alumni Network</h3>
+          <p>Our graduates in top companies will help fast-track your next interview.</p>
+        </div>
+        <div class="media">
+          <img src="images/program_page/Phase 4 - Job Assistance/referralInterviewsfromalumniNetwork.png" alt="Alumni referral network" />
+        </div>
+      </div>
+    </li>
 
-    async function loadPlacements() {
-      const res = await fetch('placements_data.json');
-      placementsData = await res.json();
+    <!-- STEP 4 -->
+    <li class="step step-4">
+      <div class="badge">4</div>
+      <div class="content">
+        <div class="text">
+          <h3>Full-Time Offer from WorkSkills</h3>
+          <p>For consistent performers, we provide direct job placement ourselves.</p>
+        </div>
+        <div class="media">
+          <img src="images/program_page/Phase 4 - Job Assistance/full-TimeOfferfromWorkSkills.png" alt="Job offer letter" />
+        </div>
+      </div>
+    </li>
 
-      populateFilters();
-      renderCards(placementsData);
-    }
+    <!-- STEP 5 -->
+    <li class="step step-5">
+      <div class="badge">5</div>
+      <div class="content">
+        <div class="text">
+          <h3>6-Month Extended Support</h3>
+          <p>Extended office hours and on-site counsel keep your search on track for half a year.</p>
+        </div>
+        <div class="media">
+          <img src="images/program_page/Phase 4 - Job Assistance/6-MonthExtendedSupport.png" alt="Calendar showing support period" />
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
 
-    function populateFilters() {
-      const yearFilter = document.getElementById('yearFilter');
-      const degreeFilter = document.getElementById('degreeFilter');
+<style>
+/* ---- container ---- */
+.journey-steps{
+  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  color:#0f172a;
+  max-width:1140px;             /* wider to make room for images */
+  margin:0 auto;
+  padding:40px 24px;
+  background:#fff;
+}
+.journey-steps h1{
+  font-size:34px;
+  line-height:1.2;
+  font-weight:800;
+  margin:0 0 28px;
+}
 
-      // Unique years
-      const years = [...new Set(placementsData.map(p => p.GraduationYear))];
-      years.forEach(year => {
-        const opt = document.createElement('option');
-        opt.value = year;
-        opt.textContent = year;
-        yearFilter.appendChild(opt);
-      });
+/* ---- list + basic layout ---- */
+.journey-steps .steps{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.journey-steps .step{
+  display:grid;
+  grid-template-columns:64px 1fr; /* badge col + content col */
+  gap:20px;
+  align-items:start;
+  position:relative;
+  padding:22px 0 36px;
+}
 
-      // Unique degrees
-      const degrees = [...new Set(placementsData.map(p => p.Degree))];
-      degrees.forEach(deg => {
-        const opt = document.createElement('option');
-        opt.value = deg;
-        opt.textContent = deg;
-        degreeFilter.appendChild(opt);
-      });
+/* ---- connector line (inherits step color) ---- */
+.journey-steps .step:not(:last-child)::after{
+  content:"";
+  position:absolute;
+  left:36px;          /* badge center */
+  top:94px;
+  width:0;
+  height:calc(100% - 86px);
+  border-left:3px dashed; /* color set per-step below */
+  opacity:.9;
+}
 
-      yearFilter.addEventListener('change', filterData);
-      degreeFilter.addEventListener('change', filterData);
-    }
+/* ---- badge ---- */
+.journey-steps .badge{
+  width:58px;
+  height:58px;
+  border-radius:9.714px;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-weight:800;
+  font-size:24px;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+}
 
-    function filterData() {
-      const year = document.getElementById('yearFilter').value;
-      const degree = document.getElementById('degreeFilter').value;
+/* ---- content split: text | image ---- */
+.journey-steps .content{
+  display:grid;
+  grid-template-columns:1fr 400px;   /* text | image */
+  align-items:center;
+  gap:24px;
+}
+.journey-steps .content .text h3{
+  margin:4px 0 8px;
+  font-size:24px;
+  line-height:1.35;
+  font-weight:700;
+}
+.journey-steps .content .text p{
+  margin:0;
+  color:#475569;
+  font-size:15px;
+  line-height:1.55;
+}
+.journey-steps .media{
+  text-align:right;
+}
+.journey-steps .media img{
+  max-width:400px;
+  width:100%;
+  height:auto;
+  display:inline-block;
+  object-fit:contain;
+}
 
-      let filtered = placementsData;
+/* ---- step color ramp (badges + connectors) ---- */
+.step-1 .badge{background:#32D583;}         /* Success-400 */
+.step-1:not(:last-child)::after{border-color:#32D583;}
 
-      if (year !== 'all') {
-        filtered = filtered.filter(p => p.GraduationYear == year);
-      }
-      if (degree !== 'all') {
-        filtered = filtered.filter(p => p.Degree == degree);
-      }
+.step-2 .badge{background:#12B76A;}         /* Success-500 */
+.step-2:not(:last-child)::after{border-color:#12B76A;}
 
-      renderCards(filtered);
-    }
+.step-3 .badge{background:#027A48;}         /* Success-700 */
+.step-3:not(:last-child)::after{border-color:#027A48;}
 
-    function renderCards(data) {
-      const container = document.getElementById('placements');
-      container.innerHTML = '';
+.step-4 .badge{background:#065F46;}
+.step-4:not(:last-child)::after{border-color:#065F46;}
 
-      data.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'card';
+.step-5 .badge{background:#064E3B;}
+.step-5:not(:last-child)::after{border-color:#064E3B;}
 
-        card.innerHTML = `
-          <img src="${p.ProfilePicture}" alt="${p.Name}" class="profile"/>
-          <div class="name">${p.Name}</div>
-          <div class="role">${p.NewCompanyPosition} @ ${p.NewCompanyName}</div>
-          <div>${p.PlacedHowLongAgo}</div>
-          <img src="${p.NewCompanyLogo}" alt="${p.NewCompanyName}" class="logo"/>
-        `;
-
-        container.appendChild(card);
-      });
-    }
-
-    loadPlacements();
-  </script>
-</body>
-</html>
+/* ---- responsive (phone/tablet) ---- */
+@media (max-width:900px){
+  .journey-steps{padding:32px 18px;}
+  .journey-steps h1{font-size:28px}
+  .journey-steps .step{
+    grid-template-columns:56px 1fr;
+    gap:16px;
+    padding:18px 0 28px;
+  }
+  .journey-steps .badge{width:52px;height:52px;font-size:20px}
+  .journey-steps .content{
+    grid-template-columns:1fr;   /* stack text then image */
+    gap:14px;
+  }
+  .journey-steps .media{text-align:left;}
+  .journey-steps .media img{
+    max-width:100%;
+  }
+}
+</style>
