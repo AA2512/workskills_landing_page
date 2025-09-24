@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkSkills Career Action Plan Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #48bf84;
+            --brand-black: #1A1A1A;
+            --brand-primary-light: #eaf8f1;
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .quiz-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex-grow: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        #screens {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding-bottom: 1rem;
+        }
+
+        .progress-bar-fill {
+            transition: width 0.5s ease-in-out;
+            background: linear-gradient(90deg, var(--brand-primary), #3db878);
+        }
+
+        .option-card {
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            border-width: 2px;
+            border-color: #F3F4F6;
+        }
+
+        .option-card:hover {
+            border-color: var(--brand-primary-light);
+            transform: translateY(-2px);
+        }
+
+        .option-card.selected,
+        .option-card.multi-selected {
+            border-color: var(--brand-primary);
+            background-color: var(--brand-primary-light);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(72, 191, 132, 0.2);
+        }
+
+        .ws-input,
+        .ws-select {
+            border: 2px solid #E0E0E0;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .ws-input:focus,
+        .ws-select:focus {
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 3px var(--brand-primary-light);
+            outline: none;
+        }
+
+        .screen-content {
+            animation: fadeIn 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stagger-item {
+            opacity: 0;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .stagger-1 {
+            animation-delay: 0.1s;
+        }
+
+        .stagger-2 {
+            animation-delay: 0.2s;
+        }
+
+        .stagger-3 {
+            animation-delay: 0.3s;
+        }
+
+        .stagger-item-1 {
+            animation-delay: 0.3s;
+        }
+
+        .stagger-item-2 {
+            animation-delay: 0.4s;
+        }
+
+        .stagger-item-3 {
+            animation-delay: 0.5s;
+        }
+
+        .stagger-item-4 {
+            animation-delay: 0.6s;
+        }
+
+        .stagger-item-5 {
+            animation-delay: 0.7s;
+        }
+
+        .stagger-item-6 {
+            animation-delay: 0.8s;
+        }
+
+
+        /* Slider Styles */
+        input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 5px;
+        }
+
+        input[type=range]::-moz-range-track {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 5px;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            margin-top: -8px;
+            background-color: var(--brand-primary);
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 2px #ccc;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            background-color: var(--brand-primary);
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 2px #ccc;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-[var(--brand-black)]">
+
+    <div id="quizApp" class="quiz-container max-w-2xl mx-auto p-4 sm:p-6">
+        <header class="flex justify-between items-center py-4 flex-shrink-0">
+            <img src="images/common/workskills_black.svg" alt="WorkSkills Logo"
+                class="h-8 sm:h-10">
+        </header>
+        <main>
+            <div id="progress-section" class="flex-shrink-0 hidden">
+                <div id="progress-container" class="w-full bg-gray-200 rounded-full h-3.5 mb-2">
+                    <div id="progressBar"
+                        class="h-3.5 rounded-full progress-bar-fill flex items-center justify-end pr-2">
+                        <span id="progress-per" class="text-white text-xs font-bold"></span>
+                    </div>
+                </div>
+                <p id="progressText" class="text-center text-sm font-semibold text-gray-600 mb-6">Let's get started!</p>
+            </div>
+            <div id="screens" class="flex-grow"></div>
+            <div id="footer-nav" class="absolute top-0 left-0 p-1 hidden">
+                <button id="backBtn"
+                    class="bg-gray-200/50 hover:bg-gray-300 text-gray-700 font-semibold p-2 rounded-full flex items-center transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizFlow = [
+                // --- The Hook ---
+                { type: 'hook', id: 'start', title: 'Unlock Your <span class="text-[var(--brand-primary)]">Career Action Plan</span> in 2 Minutes', text: 'Get a FREE, data-driven report to land your dream job, tailored to your unique skills and goals.', visual: `<div class="p-4 bg-white border-2 border-gray-100 rounded-2xl shadow-xl max-w-sm mx-auto"><div class="border border-gray-100 rounded-lg p-4 text-left"><div class="flex items-center space-x-3 mb-4"><div class="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-gray-500">You</div><div><div class="h-4 bg-gray-200 rounded w-28"></div></div></div><p class="font-bold text-green-600 text-sm">Your Personalized Career Report</p><div class="h-28 bg-gray-100 rounded-md mt-2 flex items-center justify-center"><img src="https://i.postimg.cc/wvhMY31N/image-6628.webp" alt="Graph showing salary projection" class="h-24 opacity-75"/></div><div class="mt-4 space-y-2"><p class="font-semibold text-sm">Recommended Roles:</p><div class="h-3 bg-gray-200 rounded w-full"></div><div class="h-3 bg-gray-200 rounded w-5/6"></div><div class="h-3 bg-gray-200 rounded w-1/2"></div></div></div></div>`, cta: "Start My Career Quiz" },
+
+                // --- Phase 1: Easy Profiling & Lead Capture ---
+                { id: 'phone', title: "Let's save your progress. What's your WhatsApp number?", subtext: "We'll send your report here & you can continue anytime.", type: 'text-input', placeholder: '10-digit mobile number', cta: "Continue" },
+                { id: 'name', title: "Great! And what's your full name?", type: 'text-input', placeholder: 'e.g., Priya Sharma', cta: 'Next' },
+                { id: 'status', title: 'Which of these best describes you?', type: 'visual-mcq', options: [{ value: 'College Student', text: 'College Student', icon: '🎓' }, { value: 'Recent Graduate', text: 'Recent Graduate', icon: '🎉' }, { value: 'Working Professional', text: 'Working Professional', icon: '💼' }] },
+                { id: 'goal', title: 'What’s the #1 career goal you want to achieve?', type: 'visual-mcq-multi', limit: 3, grid: 'grid-cols-2', options: [{ value: 'Secure First Job', text: 'Secure my first job', icon: '🚀' }, { value: 'Switch Career', text: 'Switch to a better field', icon: '🔄' }, { value: 'Get Salary Hike', text: 'Get a significant salary hike', icon: '💰' }, { value: 'Get Certified', text: 'Earn a recognized certificate', icon: '📜' }, { value: 'Master Skills', text: 'Master in-demand skills', icon: '🧠' }] },
+                { id: 'frustration', title: "What's the biggest challenge holding you back?", type: 'visual-mcq-multi', limit: 2, grid: 'grid-cols-2', options: [{ value: 'Degree Not Enough', text: 'My degree isn\'t enough', icon: '😥' }, { value: 'Lack Practical Skills', text: 'I lack practical skills', icon: '🛠️' }, { value: 'Not Enough Calls', text: 'Not getting interview calls', icon: '📞' }, { value: 'Stuck in Job', text: 'Stuck in a low-growth job', icon: '📉' }, { value: 'Confused', text: 'Confused about my career', icon: '🤔' }] },
+
+                // --- Nurture Screen 1 ---
+                { type: 'nurture', id: 'nurture1', title: 'You\'re in Good Company', text: 'Our graduates are hired by leading companies worldwide.', visual: `<div class="grid grid-cols-4 gap-4 mt-4 opacity-70 grayscale">${['google', 'microsoft', 'amazon', 'deloitte', 'walmart', 'accenture', 'infosys', 'tcs'].map(logo => `<img src="https://logo.clearbit.com/${logo}.com" alt="${logo} logo" class="h-8 w-auto mx-auto">`).join('')}</div>` },
+
+                // --- Phase 2: Deeper Preferences ---
+                { id: 'timeCommitment', title: 'How many hours can you dedicate to learning each week?', type: 'visual-mcq', grid: 'grid-cols-2', options: [{ value: '5-10 Hours', text: '5-10 Hours', icon: '🏃‍♂️' }, { value: '10-15 Hours', text: '10-15 Hours', icon: '💪' }, { value: '15+ Hours', text: '15+ Hours', icon: '🚀' }] },
+                { id: 'programDuration', title: "What's your ideal program duration?", type: 'visual-mcq', grid: 'grid-cols-3', options: [{ value: '< 4 Months', text: 'Under 4 Months', icon: '⚡️' }, { value: '4-8 Months', text: '4-8 Months', icon: '🏃‍♂️' }, { value: '8+ Months', text: '8+ Months', icon: '🐢' }] },
+                { id: 'importantFeatures', title: 'What matters most to you? (Choose top 3)', type: 'visual-mcq-multi', limit: 3, grid: 'grid-cols-2', options: [{ value: 'Live Classes', text: 'Live classes', icon: '🧑‍🏫' }, { value: '1-on-1 Mentorship', text: '1-on-1 Mentorship', icon: '💬' }, { value: 'Placement Support', text: 'Job placement support', icon: '🤝' }, { value: 'Hands-on Projects', text: 'Hands-on projects', icon: '🛠️' }, { value: 'Certificate', text: 'Recognized certificate', icon: '🏅' }, { value: 'Flexible Schedule', text: 'Flexible schedule', icon: '⏰' }] },
+                { id: 'device', title: 'How will you primarily join classes?', type: 'visual-mcq', grid: 'grid-cols-2', options: [{ value: 'Laptop/Desktop', text: 'Laptop / Desktop', icon: '💻' }, { value: 'Mobile/Tablet', text: 'Mobile / Tablet', icon: '📱' }] },
+
+                // --- Nurture Screen 2 ---
+                { type: 'nurture', id: 'nurture2', title: 'Fact: Skills Matter More Than Degrees', text: '91% of hiring managers prioritize practical, hands-on experience. That\'s why our programs focus on building real-world projects.', visual: `<div class="mt-4 p-4 bg-white rounded-lg shadow-inner"><p class="font-mono text-left text-sm text-gray-500"><span class="text-blue-500">const</span> user = {<br>&nbsp;&nbsp;skills: [<span class="text-green-500">'Project-Based Learning'</span>, <span class="text-green-500">'Real-World Tools'</span>],<br>&nbsp;&nbsp;readyForJob: <span class="text-yellow-500">true</span><br>};</p></div>` },
+
+                // --- Phase 3: High-Commitment Details ---
+                { id: 'degree', title: "What's your highest qualification?", type: 'visual-mcq', grid: 'grid-cols-2 sm:grid-cols-3', options: [{ value: 'B.Tech/B.E.', text: 'B.Tech/B.E.', icon: '⚙️' }, { value: 'B.Com', text: 'B.Com', icon: '📊' }, { value: 'BA', text: 'B.A.', icon: '🎨' }, { value: 'BCA', text: 'BCA', icon: '💻' }, { value: 'MBA', text: 'MBA', icon: '📈' }, { value: 'Other', text: 'Other', icon: '🌐' }] },
+                { id: 'collegeName', title: 'Which college are you from?', type: 'text-input', placeholder: 'e.g., IIT Bombay', condition: (data) => ['College Student', 'Recent Graduate'].includes(data.status), cta: 'Next' },
+                { id: 'city', title: 'Where are you located?', type: 'dropdown', options: ['Mumbai', 'Delhi', 'Bengaluru', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Other'] },
+                { id: 'age', title: 'What is your age?', type: 'visual-mcq', grid: 'grid-cols-2', options: [{ value: '18-21', text: '18-21', icon: '🌱' }, { value: '22-24', text: '22-24', icon: '🏗️' }, { value: '25-28', text: '25-28', icon: '🚀' }, { value: '28+', text: '28+', icon: '🏆' }] },
+                { id: 'gender', title: 'What is your gender?', type: 'visual-mcq', grid: 'grid-cols-2', options: [{ value: 'Male', text: 'Male', icon: '👨' }, { value: 'Female', text: 'Female', icon: '👩' }] },
+                { id: 'salary', title: 'Tell us about your salary goals.', type: 'dual-slider', currentLabel: 'Your Current Annual Salary (CTC)', targetLabel: 'Your Target Annual Salary (CTC)', fresherCheckbox: true },
+                { id: 'budget', title: 'What is your budget for a program that guarantees results?', type: 'visual-mcq', grid: 'grid-cols-2 sm:grid-cols-3', options: [{ value: '<₹5K', text: '<₹5K', icon: '🪙' }, { value: '₹5K-₹10k', text: '₹5K-₹10k', icon: '💸' }, { value: '₹10K-₹30K', text: '₹10K-₹30K', icon: '💵' }, { value: '₹30K-₹50K', text: '₹30K-₹50K', icon: '💴' }, { value: '₹50K-₹80K', text: '₹50K-₹80K', icon: '💶' }, { value: '₹80K-₹1.2L', text: '₹80K-₹1.2L', icon: '💎' }] },
+                { id: 'enrollTimeline', title: 'How soon are you ready to start?', type: 'visual-mcq', grid: 'grid-cols-2', options: [{ value: 'Right away!', text: 'Right away!', icon: '⚡️' }, { value: 'Next 2-3 weeks', text: 'In 2-3 weeks', icon: '🗓️' }, { value: 'This month', text: 'This month', icon: '📅' }, { value: 'Exploring', text: 'Just exploring', icon: '🤔' }] },
+                { id: 'final', title: "You're all set, {{name}}!", subtext: "Provide your email to get your report. Our career advisor will call you to discuss your personalized plan.", type: 'final', cta: 'Get My Action Plan' }
+            ];
+
+            let currentScreenIndex = 0;
+            const formData = {};
+            const screensContainer = document.getElementById('screens');
+            const backBtn = document.getElementById('backBtn');
+            const footerNav = document.getElementById('footer-nav');
+
+            const navigate = (direction) => {
+                let newIndex = currentScreenIndex + direction;
+                while (direction < 0 && newIndex > 0 && quizFlow[newIndex].condition && !quizFlow[newIndex].condition(formData)) {
+                    newIndex += direction;
+                }
+                while (direction > 0 && newIndex < quizFlow.length && quizFlow[newIndex].condition && !quizFlow[newIndex].condition(formData)) {
+                    newIndex += direction;
+                }
+
+                if (newIndex >= 0 && newIndex < quizFlow.length) {
+                    currentScreenIndex = newIndex;
+                    renderScreen();
+                } else if (newIndex >= quizFlow.length) {
+                    renderThankYou();
+                }
+            };
+
+            const renderThankYou = () => {
+                const name = formData.name ? formData.name.split(' ')[0] : 'Congratulations';
+                // 🚀 Send to Google Sheet
+                sendToSheet(normalizeForSheet(formData));
+                document.body.innerHTML = `<div class="w-screen h-screen flex flex-col items-center justify-center text-center p-4 bg-white"><img src="images/common/workskills_black.svg" alt="WorkSkills Logo" class="h-12 mb-8"><div class="text-green-500"><svg class="w-24 h-24" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.207a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></div><h2 class="text-4xl font-extrabold mt-4">Thank You, ${name}!</h2><p class="text-gray-600 text-xl max-w-md mt-2">Your personalized Action Plan is on its way. A career advisor will be in touch shortly!</p><div class="mt-6 bg-gray-100 p-4 rounded-lg w-full max-w-sm"><h3 class="font-bold text-lg">Quick Wins for You:</h3><ul class="text-left mt-2 space-y-1 text-sm"><li><span class="font-semibold">Goal: ${formData.goal ? formData.goal.join(', ') : 'Achieve your goals'}</span> - Start by updating your LinkedIn headline to reflect this ambition.</li><li><span class="font-semibold">Frustration: ${formData.frustration ? formData.frustration[0] : 'Overcome challenges'}</span> - Watch one free Workskills webinar on this topic this week.</li></ul></div></div>`;
+                console.log("Final Data:", formData);
+            }
+
+            const renderScreen = () => {
+                screensContainer.innerHTML = '';
+                const screenData = quizFlow[currentScreenIndex];
+                if (currentScreenIndex > 0) {
+                    document.getElementById('progress-section').classList.remove('hidden');
+                    footerNav.classList.remove('hidden');
+                } else {
+                    footerNav.classList.add('hidden');
+                }
+                updateProgress();
+
+                const screenWrapper = document.createElement('div');
+                screenWrapper.className = 'screen-content';
+                let title = screenData.title ? screenData.title.replace('{{name}}', formData.name ? formData.name.split(' ')[0] : 'Friend') : '';
+                let content = '';
+
+                switch (screenData.type) {
+                    case 'visual-mcq':
+                    case 'visual-mcq-multi':
+                        content = `<div class="text-center mb-4 stagger-1"><h2 class="text-3xl font-extrabold">${title}</h2></div><div class="grid ${screenData.grid || 'grid-cols-2'} gap-3">${screenData.options.map((opt, index) => `<div class="option-card bg-white rounded-xl p-3 flex flex-col items-center justify-center text-center shadow-md aspect-[4/3] stagger-item stagger-item-${index + 1}" data-value="${opt.value}"><div class="text-3xl mb-1">${opt.icon || ''}</div><span class="font-semibold text-sm text-gray-800">${opt.text}</span></div>`).join('')}</div>`;
+                        if (screenData.type === 'visual-mcq-multi') {
+                            content += `<div class="text-center mt-6 flex-shrink-0 opacity-0 stagger-item stagger-item-${screenData.options.length + 1}"><button id="multi-next-btn" class="bg-[var(--brand-black)] text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-gray-800 transition-all disabled:opacity-50" disabled>Next</button></div>`;
+                        }
+                        break;
+                    case 'hook':
+                        content = `<div class="text-center p-2 flex flex-col items-center justify-center stagger-1"><h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">${title}</h2><p class="text-gray-600 mt-2 text-base md:text-lg stagger-2">${screenData.text || ''}</p><div class="my-6 max-w-sm w-full stagger-2">${screenData.visual}</div><button class="form-submit-btn bg-[var(--brand-primary)] text-white font-bold py-4 px-12 rounded-xl shadow-lg shadow-green-500/30 hover:bg-green-700 transition-all transform hover:scale-105 stagger-3">${screenData.cta}</button></div>`;
+                        break;
+                    case 'text-input':
+                    case 'final':
+                        const fields = screenData.id ? [{ id: screenData.id, placeholder: screenData.placeholder, type: 'text', validation: screenData.validation }] : screenData.fields || [{ id: 'email', placeholder: 'Enter your E-Mail', type: 'email', validation: screenData.validation }];
+                        content = `<div class="text-center p-2 flex flex-col items-center justify-center stagger-1"><h2 class="text-3xl font-extrabold leading-tight">${title}</h2><p class="text-gray-600 mt-2 text-base md:text-lg stagger-2">${screenData.subtext || ''}</p><div class="mt-8 space-y-2 w-full max-w-sm mx-auto stagger-3">${fields.map(field => `<div><input type="${field.type}" id="${field.id}" class="w-full p-4 border-2 rounded-lg text-lg ws-input" placeholder="${field.placeholder}" value="${formData[field.id] || ''}"><p id="${field.id}-error" class="text-red-500 text-sm text-left h-4"></p></div>`).join('')}</div><button class="form-submit-btn mt-6 bg-[var(--brand-primary)] text-white font-bold py-4 px-12 rounded-xl shadow-lg shadow-green-500/30 hover:bg-green-700 transition-all transform hover:scale-105 disabled:opacity-50 stagger-3">${screenData.cta}</button></div>`;
+                        break;
+                    case 'dropdown':
+                        content = `<div class="text-center p-6 sm:p-8 flex flex-col justify-center w-full max-w-md mx-auto stagger-1"><h2 class="text-3xl font-extrabold">${title}</h2><div class="mt-8 stagger-2"><select id="${screenData.id}" class="w-full p-4 border-2 rounded-lg text-lg ws-select"><option value="" disabled selected>Select your city</option>${screenData.options.map(o => `<option value="${o}">${o}</option>`).join('')}</select></div></div>`;
+                        break;
+                    case 'tabs':
+                        content = `<div class="text-center p-2 md:p-6 flex flex-col items-center justify-center w-full max-w-md mx-auto stagger-1"><h2 class="text-3xl font-extrabold leading-tight">${title}</h2><div class="mt-8 grid grid-cols-2 gap-3 w-full stagger-2">${screenData.options.map((opt, index) => `<button class="option-tab bg-white p-4 rounded-lg border-2 stagger-item stagger-item-${index + 1}" data-value="${opt}">${opt}</button>`).join('')}</div></div>`
+                        break;
+                    case 'dual-slider':
+                        content = `<div class="text-center p-2 md:p-6 flex flex-col items-center justify-center w-full max-w-md mx-auto stagger-1"><h2 class="text-3xl font-extrabold leading-tight">${title}</h2><div class="w-full mt-8 space-y-8 stagger-2"><div><label class="font-semibold">${screenData.currentLabel}</label><div class="flex items-center space-x-4"><input type="range" id="currentSalary" class="w-full" min="0" max="50" value="0"><p id="current-value" class="text-lg font-bold text-gray-800 w-24 text-right"></p></div><div class="mt-2 text-left"><label class="text-sm"><input type="checkbox" id="fresher-checkbox"> I'm a Fresher</label></div></div><div><label class="font-semibold">${screenData.targetLabel}</label><div class="flex items-center space-x-4"><input type="range" id="targetSalary" class="w-full" min="0" max="50" value="5"><p id="target-value" class="text-lg font-bold text-[var(--brand-primary)] w-24 text-right"></p></div></div></div><button class="form-submit-btn mt-8 bg-[var(--brand-black)] text-white font-bold py-4 px-12 rounded-xl shadow-lg transition-all stagger-3">Next</button></div>`;
+                        break;
+                    case 'nurture':
+                        content = `<div class="p-6 rounded-lg flex flex-col items-center justify-center text-center min-h-[300px] stagger-1"><h2 class="text-3xl font-extrabold">${screenData.title}</h2><p class="text-gray-600 mt-2 max-w-md stagger-2">${screenData.text}</p><div class="my-6 w-full stagger-3">${screenData.visual}</div></div>`;
+                        break;
+                }
+                screenWrapper.innerHTML = content;
+                screensContainer.appendChild(screenWrapper);
+                addEventListeners();
+            };
+
+            const addEventListeners = () => {
+                const screenData = quizFlow[currentScreenIndex];
+                if (screenData.type === 'visual-mcq') {
+                    document.querySelectorAll('.option-card').forEach(card => card.addEventListener('click', () => {
+                        formData[screenData.id] = card.dataset.value;
+                        setTimeout(() => navigate(1), 200);
+                    }));
+                } else if (screenData.type === 'visual-mcq-multi') {
+                    formData[screenData.id] = formData[screenData.id] || [];
+                    const nextBtn = document.getElementById('multi-next-btn');
+                    document.querySelectorAll('.option-card').forEach(card => {
+                        if (formData[screenData.id].includes(card.dataset.value)) card.classList.add('multi-selected');
+                        card.addEventListener('click', () => {
+                            const value = card.dataset.value;
+                            const selected = formData[screenData.id];
+                            if (selected.includes(value)) {
+                                formData[screenData.id] = selected.filter(v => v !== value);
+                                card.classList.remove('multi-selected');
+                            } else if (selected.length < screenData.limit) {
+                                formData[screenData.id].push(value);
+                                card.classList.add('multi-selected');
+                            }
+                            nextBtn.disabled = formData[screenData.id].length === 0;
+                        });
+                    });
+                    nextBtn.disabled = formData[screenData.id].length === 0;
+                    nextBtn.addEventListener('click', () => navigate(1));
+                } else if (screenData.type === 'hook') {
+                    document.querySelector('.form-submit-btn').addEventListener('click', () => navigate(1));
+                } else if (screenData.type === 'text-input' || screenData.type === 'final') {
+                    const button = document.querySelector('.form-submit-btn');
+                    const fields = screenData.id ? [{ id: screenData.id, validation: screenData.validation }] : screenData.fields || [{ id: 'email', placeholder: 'Enter your E-Mail', type: 'email', validation: screenData.validation }];
+                    const inputs = fields.map(f => document.getElementById(f.id));
+
+                    const validateField = (input, validation) => {
+                        const errorEl = document.getElementById(`${input.id}-error`);
+                        if (!validation || !errorEl) return true;
+                        if (!validation.regex.test(input.value)) {
+                            errorEl.textContent = validation.error;
+                            return false;
+                        }
+                        errorEl.textContent = '';
+                        return true;
+                    };
+
+                    const validateAll = () => {
+                        let allValid = true;
+                        inputs.forEach((input, i) => {
+                            if (!validateField(input, fields[i].validation)) allValid = false;
+                            if (!input.value.trim()) allValid = false;
+                        });
+                        button.disabled = !allValid;
+                    };
+
+                    inputs.forEach((input, i) => {
+                        input.addEventListener('input', () => {
+                            formData[input.id] = input.value;
+                            validateField(input, fields[i].validation);
+                            validateAll();
+                        });
+                    });
+                    button.addEventListener('click', () => navigate(1));
+                    validateAll();
+                } else if (screenData.type === 'dual-slider') {
+                    document.querySelector('.form-submit-btn').addEventListener('click', () => navigate(1));
+                    setupSlider('currentSalary', 'current-value', (v) => `${v}L`);
+                    setupSlider('targetSalary', 'target-value', (v) => `${v}L`);
+                    const fresherCheckbox = document.getElementById('fresher-checkbox');
+                    const currentSalarySlider = document.getElementById('currentSalary');
+                    const currentValueEl = document.getElementById('current-value');
+                    fresherCheckbox.addEventListener('change', (e) => {
+                        if (e.target.checked) {
+                            currentSalarySlider.value = 0;
+                            currentSalarySlider.disabled = true;
+                            currentValueEl.textContent = 'Fresher';
+                            formData.currentSalary = 'Fresher';
+                        } else {
+                            currentSalarySlider.disabled = false;
+                            setupSlider('currentSalary', 'current-value', (v) => `${v}L`);
+                        }
+                    });
+                } else if (screenData.type === 'tabs') {
+                    document.querySelectorAll('.option-tab').forEach(tab => {
+                        tab.addEventListener('click', () => {
+                            formData[screenData.id] = tab.dataset.value;
+                            document.querySelectorAll('.option-tab').forEach(t => t.classList.remove('selected', 'bg-green-100', 'border-green-500'));
+                            tab.classList.add('selected', 'bg-green-100', 'border-green-500');
+                            setTimeout(() => navigate(1), 200);
+                        })
+                    })
+                } else if (screenData.type === 'dropdown') {
+                    const select = screensContainer.querySelector('select');
+                    select.addEventListener('change', () => {
+                        formData[screenData.id] = select.value;
+                        if (select.value) {
+                            setTimeout(() => navigate(1), 300);
+                        }
+                    });
+                } else if (screenData.type === 'nurture') {
+                    setTimeout(() => navigate(1), 3500); // Auto-advance nurture screen
+                }
+            };
+
+            function setupSlider(id, valueId, formatFn) {
+                const slider = document.getElementById(id);
+                const valueEl = document.getElementById(valueId);
+                const salaryValues = Array.from({ length: 51 }, (_, i) => i);
+                function update() {
+                    const value = salaryValues[slider.value];
+                    valueEl.textContent = formatFn(value);
+                    formData[id] = formatFn(value);
+                }
+                slider.addEventListener('input', update);
+                update();
+            }
+
+            const updateProgress = () => {
+                if (currentScreenIndex === 0) return;
+                const progress = ((currentScreenIndex - 1) / (quizFlow.length - 2)) * 100;
+                document.getElementById('progressBar').style.width = `${progress}%`;
+                document.getElementById('progress-per').innerText = `${Math.round(progress)}%`;
+                const messages = ["Phase 1: Profiling You", "Phase 2: Analyzing Goals", "Phase 3: Finalizing"];
+                document.getElementById('progressText').innerHTML = `⚙️ <span class="font-bold">${messages[Math.floor((currentScreenIndex - 1) / ((quizFlow.length - 2) / 3))] || messages[2]}</span>`;
+            };
+
+            backBtn.addEventListener('click', () => navigate(-1));
+            renderScreen();
+        });
+
+        // === Sheet endpoint config ===
+        const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyoytb0w4jsTCeL7AVHSm5cf0qlOfS7KM5aoFzI2ssHFiqp5vUzUrLym2VuG-_GmNfT/exec'; // <- your /exec URL
+        const SHEET_TOKEN = 'super-secret'; // must match Apps Script
+
+        function normalizeForSheet(data) {
+            // Flatten arrays to comma-separated strings; keep everything else as-is
+            const join = v => Array.isArray(v) ? v.join(', ') : v ?? '';
+            return {
+                token: SHEET_TOKEN,
+                name: data.name,
+                phone: data.phone,
+                email: data.email,
+                status: data.status,
+                goal: data.goal,                               // array OK (server joins)
+                frustration: data.frustration,                 // array OK (server joins)
+                timeCommitment: data.timeCommitment,
+                programDuration: data.programDuration,
+                importantFeatures: data.importantFeatures,     // array OK
+                device: data.device,
+                degree: data.degree,
+                collegeName: data.collegeName,
+                city: data.city,
+                age: data.age,
+                gender: data.gender,
+                currentSalary: data.currentSalary,             // e.g., "Fresher" or "12L"
+                targetSalary: data.targetSalary,               // e.g., "18L"
+                budget: data.budget,
+                enrollTimeline: data.enrollTimeline
+            };
+        }
+
+        function sendToSheet(payload) {
+            // Apps Script web apps can’t reliably set CORS; use no-cors so the write succeeds.
+            // (You won’t be able to read the JSON response—this is expected.)
+            try {
+                fetch(SHEET_ENDPOINT, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (e) {
+                // Swallow; we already show the thank-you screen.
+                console.warn('Sheet post failed (ignored):', e);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
