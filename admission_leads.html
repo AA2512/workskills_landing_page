@@ -20,7 +20,10 @@
         html,
         body {
             height: 100%;
-            overflow: hidden;
+            /* Allow vertical scrolling for overflow content on all screens */
+            overflow-y: auto;
+            /* Enable smooth scrolling when navigating overflow content */
+            scroll-behavior: smooth;
         }
 
         body {
@@ -57,7 +60,8 @@
         }
 
         .option-card {
-            transition: all 0.2s ease-in-out;
+            /* Snappy interaction: reduce transition duration for a more instant feel */
+            transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             border-width: 2px;
             border-color: #F3F4F6;
@@ -72,8 +76,58 @@
         .option-card.multi-selected {
             border-color: var(--brand-primary);
             background-color: var(--brand-primary-light);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(72, 191, 132, 0.2);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 28px rgba(72, 191, 132, 0.3);
+        }
+
+        /* Back button styling: sits in the header. Hidden on first screen, shown on subsequent steps. */
+        #backBtn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: transparent;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.75rem;
+            color: var(--brand-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+            box-shadow: none;
+            /* Position the back button at the top of the header so it sits above the progress bar */
+            top: 0;
+            transform: translateY(0);
+        }
+
+        #backBtn:hover {
+            background-color: var(--brand-primary-light);
+        }
+
+        #backBtn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        /* Utility class for vertically stacked option cards. Ensures the card uses a horizontal layout with bigger icon and text. */
+        .option-card.vertical {
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .option-card.vertical .icon {
+            margin-right: 1rem;
+            font-size: 2rem;
+        }
+
+        .option-card.vertical span {
+            font-weight: normal;
+            font-size: 1.125rem;
+        }
+
+        /* Hide the small phase heading (e.g., "Phase 1: Profiling You") on all screens */
+        #progressText {
+            display: none;
         }
 
         .ws-input,
@@ -90,14 +144,29 @@
         }
 
         .screen-content {
-            animation: fadeIn 0.5s ease-in-out;
+            /* Use a smooth slide-and-fade animation for each screen, giving a more polished transition */
+            animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             width: 100%;
         }
 
+        /* Fade-in keyframe retained for backwards compatibility if needed */
         @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Slide-in animation with a slight upward movement and fade */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
             }
 
             to {
@@ -147,6 +216,23 @@
             animation-delay: 0.8s;
         }
 
+        /* Carousel animation used on the Student Placements Showcase screen.
+           Slides the inner flex container horizontally to create an auto-scrolling effect. */
+        @keyframes scrollCarousel {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-carousel {
+            /* Increase the carousel speed: shorter duration means faster movement */
+            animation: scrollCarousel 20s linear infinite;
+        }
+
 
         /* Slider Styles */
         input[type=range] {
@@ -189,15 +275,119 @@
             border: 4px solid white;
             box-shadow: 0 0 0 2px #ccc;
         }
+
+        /*
+         * Responsive tweaks for mobile devices
+         *
+         * The quiz was originally designed for desktop viewports which meant some screens
+         * could require scrolling on small devices. To deliver a more polished user
+         * experience, we scale down typography, compact card sizes and adjust grid
+         * layouts so each step fits fully within a typical mobile viewport without
+         * introducing vertical scroll bars. We also remove the default center alignment
+         * on the screen container for mobile so content starts from the top.
+         */
+        @media (max-width: 640px) {
+
+            /* Start content at the top rather than vertically centering it on mobile */
+            #screens {
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            /* Shrink the base font size to scale down all rem-based typography */
+            html {
+                font-size: 14px;
+            }
+
+            /* Remove overflow restrictions on mobile to allow smooth scrolling */
+            body,
+            html {
+                overflow-y: auto;
+            }
+
+            main {
+                overflow-y: auto;
+            }
+
+            #screens {
+                overflow-y: auto;
+            }
+
+            /* Use three columns instead of two for option grids to reduce the number of rows */
+            .grid.grid-cols-2 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            /* Compact option cards: reduce padding */
+            #screens .option-card {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+
+            /* Shrink icons inside option cards */
+            #screens .option-card .text-3xl {
+                font-size: 1.75rem;
+                line-height: 1.2;
+            }
+
+            /* Shrink labels inside option cards */
+            #screens .option-card span {
+                font-size: 0.875rem;
+                line-height: 1.2;
+            }
+
+            /* Reduce heading sizes on quiz screens */
+            #screens h2 {
+                font-size: 1.75rem;
+                line-height: 1.3;
+            }
+
+            /* Decrease the top/bottom margin for the visual section in the hook screen */
+            .my-6 {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            /* Reduce padding on inputs and selects */
+            .ws-input,
+            .ws-select {
+                padding: 0.75rem;
+                font-size: 0.875rem;
+            }
+
+            /* Reduce padding and font size on CTA buttons */
+            .form-submit-btn {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+                font-size: 0.875rem;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-gray-50 text-[var(--brand-black)]">
 
     <div id="quizApp" class="quiz-container max-w-2xl mx-auto p-4 sm:p-6">
-        <header class="flex justify-between items-center py-4 flex-shrink-0">
-            <img src="images/common/workskills_black.svg" alt="WorkSkills Logo"
-                class="h-8 sm:h-10">
+        <header class="relative flex items-center justify-center py-4 flex-shrink-0">
+            <!-- Back button is now part of the header. It is hidden on the first screen and shown afterwards. -->
+            <!-- The back button sits at the top left of the header. The positioning is handled via CSS to ensure it stays above the progress bar. -->
+            <button id="backBtn" class="absolute left-4 hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                        clip-rule="evenodd" />
+                </svg>
+            </button>
+            <!-- Centered logo -->
+            <img src="images/common/workskills_black.svg" alt="WorkSkills Logo" class="h-8 sm:h-10 mx-auto">
+            <!-- Step counter displayed on the right -->
+            <div id="step-counter" class="absolute right-4 text-gray-500 text-sm font-semibold"></div>
         </header>
         <main>
             <div id="progress-section" class="flex-shrink-0 hidden">
@@ -210,24 +400,20 @@
                 <p id="progressText" class="text-center text-sm font-semibold text-gray-600 mb-6">Let's get started!</p>
             </div>
             <div id="screens" class="flex-grow"></div>
-            <div id="footer-nav" class="absolute top-0 left-0 p-1 hidden">
-                <button id="backBtn"
-                    class="bg-gray-200/50 hover:bg-gray-300 text-gray-700 font-semibold p-2 rounded-full flex items-center transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </div>
+            <!-- The footer-nav (back button container) has been removed; the back button is now in the header -->
         </main>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Generate a unique session ID once at the start
+            const SESSION_ID = (self.crypto && crypto.randomUUID)
+                ? crypto.randomUUID()
+                : ('session_' + Date.now() + '_' + Math.random().toString(36).slice(2));
+
             const quizFlow = [
                 // --- The Hook ---
-                { type: 'hook', id: 'start', title: 'Unlock Your <span class="text-[var(--brand-primary)]">Career Action Plan</span> in 2 Minutes', text: 'Get a FREE, data-driven report to land your dream job, tailored to your unique skills and goals.', visual: `<div class="p-4 bg-white border-2 border-gray-100 rounded-2xl shadow-xl max-w-sm mx-auto"><div class="border border-gray-100 rounded-lg p-4 text-left"><div class="flex items-center space-x-3 mb-4"><div class="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-gray-500">You</div><div><div class="h-4 bg-gray-200 rounded w-28"></div></div></div><p class="font-bold text-green-600 text-sm">Your Personalized Career Report</p><div class="h-28 bg-gray-100 rounded-md mt-2 flex items-center justify-center"><img src="https://i.postimg.cc/wvhMY31N/image-6628.webp" alt="Graph showing salary projection" class="h-24 opacity-75"/></div><div class="mt-4 space-y-2"><p class="font-semibold text-sm">Recommended Roles:</p><div class="h-3 bg-gray-200 rounded w-full"></div><div class="h-3 bg-gray-200 rounded w-5/6"></div><div class="h-3 bg-gray-200 rounded w-1/2"></div></div></div></div>`, cta: "Start My Career Quiz" },
+                { type: 'hook', id: 'start', title: 'Unlock Your <span class="text-[var(--brand-primary)]">Career Action Plan</span> in 2 Minutes', text: 'Get a FREE, data-driven report to land your dream job, tailored to your unique skills and goals.', visual: `<div class="p-4 bg-white border-2 border-gray-100 rounded-2xl shadow-xl max-w-sm mx-auto"><div class="border border-gray-100 rounded-lg p-4 text-left"><div class="flex items-center space-x-3 mb-4"><div class="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-gray-500">You</div><div><div class="h-4 bg-gray-200 rounded w-28"></div></div></div><p class="font-bold text-green-600 text-sm">Your Personalized Career Report</p><div class="mt-4 space-y-2"><p class="font-semibold text-sm">Recommended Roles:</p><div class="h-3 bg-gray-200 rounded w-full"></div><div class="h-3 bg-gray-200 rounded w-5/6"></div><div class="h-3 bg-gray-200 rounded w-1/2"></div></div></div></div>`, cta: "Start My Career Quiz" },
 
                 // --- Phase 1: Easy Profiling & Lead Capture ---
                 { id: 'phone', title: "Let's save your progress. What's your WhatsApp number?", subtext: "We'll send your report here & you can continue anytime.", type: 'text-input', placeholder: '10-digit mobile number', cta: "Continue" },
@@ -236,35 +422,341 @@
                 { id: 'goal', title: 'What’s the #1 career goal you want to achieve?', type: 'visual-mcq-multi', limit: 3, grid: 'grid-cols-2', options: [{ value: 'Secure First Job', text: 'Secure my first job', icon: '🚀' }, { value: 'Switch Career', text: 'Switch to a better field', icon: '🔄' }, { value: 'Get Salary Hike', text: 'Get a significant salary hike', icon: '💰' }, { value: 'Get Certified', text: 'Earn a recognized certificate', icon: '📜' }, { value: 'Master Skills', text: 'Master in-demand skills', icon: '🧠' }] },
                 { id: 'frustration', title: "What's the biggest challenge holding you back?", type: 'visual-mcq-multi', limit: 2, grid: 'grid-cols-2', options: [{ value: 'Degree Not Enough', text: 'My degree isn\'t enough', icon: '😥' }, { value: 'Lack Practical Skills', text: 'I lack practical skills', icon: '🛠️' }, { value: 'Not Enough Calls', text: 'Not getting interview calls', icon: '📞' }, { value: 'Stuck in Job', text: 'Stuck in a low-growth job', icon: '📉' }, { value: 'Confused', text: 'Confused about my career', icon: '🤔' }] },
 
-                // --- Nurture Screen 1 ---
-                { type: 'nurture', id: 'nurture1', title: 'You\'re in Good Company', text: 'Our graduates are hired by leading companies worldwide.', visual: `<div class="grid grid-cols-4 gap-4 mt-4 opacity-70 grayscale">${['google', 'microsoft', 'amazon', 'deloitte', 'walmart', 'accenture', 'infosys', 'tcs'].map(logo => `<img src="https://logo.clearbit.com/${logo}.com" alt="${logo} logo" class="h-8 w-auto mx-auto">`).join('')}</div>` },
+                // Removed old nurture screen definitions to consolidate into the new info screens
 
                 // --- Phase 2: Deeper Preferences ---
-                { id: 'timeCommitment', title: 'How many hours can you dedicate to learning each week?', type: 'visual-mcq', grid: 'grid-cols-2', options: [{ value: '5-10 Hours', text: '5-10 Hours', icon: '🏃‍♂️' }, { value: '10-15 Hours', text: '10-15 Hours', icon: '💪' }, { value: '15+ Hours', text: '15+ Hours', icon: '🚀' }] },
-                { id: 'programDuration', title: "What's your ideal program duration?", type: 'visual-mcq', grid: 'grid-cols-3', options: [{ value: '< 4 Months', text: 'Under 4 Months', icon: '⚡️' }, { value: '4-8 Months', text: '4-8 Months', icon: '🏃‍♂️' }, { value: '8+ Months', text: '8+ Months', icon: '🐢' }] },
+                {
+                    id: 'timeCommitment', title: 'How much time can you commit in learning per day?', type: 'visual-mcq', options: [
+                        { value: 'Less than 30 minutes', text: 'Less than 30 minutes', icon: '⏱️' },
+                        { value: '30 minutes – 1 hour', text: '30 minutes – 1 hour', icon: '🕒' },
+                        { value: '1 – 3 hours', text: '1 – 3 hours', icon: '📚' },
+                        { value: '3 hours+', text: '3 hours+', icon: '🔥' }
+                    ]
+                },
+                {
+                    id: 'programDuration', title: 'How long of a program can you commit to?', type: 'visual-mcq', options: [
+                        { value: '1–2 weeks', text: '1–2 weeks', icon: '🗓️' },
+                        { value: '1 month', text: '1 month', icon: '📆' },
+                        { value: '2–3 months', text: '2–3 months', icon: '📅' },
+                        { value: '4–6 months', text: '4–6 months', icon: '🕰️' },
+                        { value: '6+ months', text: '6+ months', icon: '🏁' }
+                    ]
+                },
                 { id: 'importantFeatures', title: 'What matters most to you? (Choose top 3)', type: 'visual-mcq-multi', limit: 3, grid: 'grid-cols-2', options: [{ value: 'Live Classes', text: 'Live classes', icon: '🧑‍🏫' }, { value: '1-on-1 Mentorship', text: '1-on-1 Mentorship', icon: '💬' }, { value: 'Placement Support', text: 'Job placement support', icon: '🤝' }, { value: 'Hands-on Projects', text: 'Hands-on projects', icon: '🛠️' }, { value: 'Certificate', text: 'Recognized certificate', icon: '🏅' }, { value: 'Flexible Schedule', text: 'Flexible schedule', icon: '⏰' }] },
                 { id: 'device', title: 'How will you primarily join classes?', type: 'visual-mcq', grid: 'grid-cols-2', options: [{ value: 'Laptop/Desktop', text: 'Laptop / Desktop', icon: '💻' }, { value: 'Mobile/Tablet', text: 'Mobile / Tablet', icon: '📱' }] },
 
-                // --- Nurture Screen 2 ---
-                { type: 'nurture', id: 'nurture2', title: 'Fact: Skills Matter More Than Degrees', text: '91% of hiring managers prioritize practical, hands-on experience. That\'s why our programs focus on building real-world projects.', visual: `<div class="mt-4 p-4 bg-white rounded-lg shadow-inner"><p class="font-mono text-left text-sm text-gray-500"><span class="text-blue-500">const</span> user = {<br>&nbsp;&nbsp;skills: [<span class="text-green-500">'Project-Based Learning'</span>, <span class="text-green-500">'Real-World Tools'</span>],<br>&nbsp;&nbsp;readyForJob: <span class="text-yellow-500">true</span><br>};</p></div>` },
+                // ---
+                // Introduce nine nurture/info screens sourced from the Trainity variation page.
+                // These screens provide key program highlights, student outcomes and assurance details.
+
+                // 1. Trusted by learners – India’s #1 platform
+                {
+                    type: 'nurture',
+                    id: 'info1',
+                    title: 'Trusted by Learners',
+                    text: 'India’s #1 education platform loved by thousands of learners.',
+                    visual: `<div class="space-y-6 mt-4 text-gray-700">
+    <h3 class="text-2xl font-semibold text-center">India’s #1 Education Platform</h3>
+    <div class="flex justify-center space-x-6 text-center">
+        <div><span class="block text-3xl font-bold text-[var(--brand-primary)]">1L+</span><span class="block text-sm">Learners</span></div>
+        <div><span class="block text-3xl font-bold text-[var(--brand-primary)]">4.8★</span><span class="block text-sm">Google Rating</span></div>
+        <div><span class="block text-3xl font-bold text-[var(--brand-primary)]">4.5K+</span><span class="block text-sm">Alumni</span></div>
+    </div>
+    <div class="grid grid-cols-4 sm:grid-cols-5 gap-4 opacity-80 grayscale mt-6">
+        <img src="https://logo.clearbit.com/google.com" alt="Google" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/amazon.com" alt="Amazon" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/meta.com" alt="Meta" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/swiggy.com" alt="Swiggy" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/zomato.com" alt="Zomato" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/flipkart.com" alt="Flipkart" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/deloitte.com" alt="Deloitte" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/accenture.com" alt="Accenture" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/uber.com" alt="Uber" class="h-8 mx-auto">
+    </div>
+</div>`
+                },
+
+                // 2. Students land top internships and jobs
+                {
+                    type: 'nurture',
+                    id: 'info2',
+                    title: 'Our students land top internships and jobs',
+                    text: 'Our alumni secure coveted roles at leading firms across tech and business sectors.',
+                    // Showcase a wider selection of company logos to emphasise successful placements.
+                    visual: `<div class="grid grid-cols-4 sm:grid-cols-6 gap-4 mt-6 opacity-90">
+    <img src="https://logo.clearbit.com/google.com" alt="Google" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/amazon.com" alt="Amazon" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/meta.com" alt="Meta" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/swiggy.com" alt="Swiggy" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/zomato.com" alt="Zomato" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/flipkart.com" alt="Flipkart" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/deloitte.com" alt="Deloitte" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/accenture.com" alt="Accenture" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/ibm.com" alt="IBM" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/tcs.com" alt="TCS" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/infosys.com" alt="Infosys" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/wipro.com" alt="Wipro" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/cognizant.com" alt="Cognizant" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/capgemini.com" alt="Capgemini" class="h-8 mx-auto">
+    <img src="https://logo.clearbit.com/uber.com" alt="Uber" class="h-8 mx-auto">
+</div>`
+                },
+
+                // 3. Why choose WorkSkills?
+                {
+                    type: 'nurture',
+                    id: 'info3',
+                    title: 'Why Choose WorkSkills?',
+                    text: '',
+                    // Use a richer visual with emojis and a supporting logo grid as in the older variation.
+                    visual: `<div class="space-y-6 mt-6 text-gray-700">
+    <ul class="space-y-3 text-left">
+        <li class="flex items-start"><span class="mr-3 text-2xl">❤️</span><span>Loved by 1L+ learners across India</span></li>
+        <li class="flex items-start"><span class="mr-3 text-2xl">🌟</span><span>Rated 4.8★ on Google Reviews</span></li>
+        <li class="flex items-start"><span class="mr-3 text-2xl">🏛️</span><span>Government‑recognised programs</span></li>
+        <li class="flex items-start"><span class="mr-3 text-2xl">👥</span><span>Thriving 4.5K+ alumni network</span></li>
+        <li class="flex items-start"><span class="mr-3 text-2xl">💸</span><span>Pay after placement available</span></li>
+    </ul>
+    <div class="grid grid-cols-4 sm:grid-cols-5 gap-4 opacity-80 grayscale mt-4">
+        <img src="https://logo.clearbit.com/google.com" alt="Google" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/amazon.com" alt="Amazon" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/meta.com" alt="Meta" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/swiggy.com" alt="Swiggy" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/zomato.com" alt="Zomato" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/flipkart.com" alt="Flipkart" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/uber.com" alt="Uber" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/accenture.com" alt="Accenture" class="h-8 mx-auto">
+        <img src="https://logo.clearbit.com/deloitte.com" alt="Deloitte" class="h-8 mx-auto">
+    </div>
+</div>`
+                },
+
+                // 4. Program Overview
+                {
+                    type: 'nurture',
+                    id: 'info4',
+                    title: 'Program Overview',
+                    text: 'Designed for recent graduates and working professionals, our program adapts to your lifestyle.',
+                    visual: `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 text-gray-700">
+    <div class="flex items-start space-x-3"><span class="text-2xl">⏳</span><div><p class="font-semibold">5–8 month duration</p><p class="text-sm">Work at your own pace with flexible deadlines</p></div></div>
+    <div class="flex items-start space-x-3"><span class="text-2xl">🎓</span><div><p class="font-semibold">No CGPA cut‑off</p><p class="text-sm">Open to B.Tech, B.Sc, B.Com, BBA & more</p></div></div>
+    <div class="flex items-start space-x-3"><span class="text-2xl">💻</span><div><p class="font-semibold">Fully online</p><p class="text-sm">1 hr class + 2 hr project every day</p></div></div>
+    <div class="flex items-start space-x-3"><span class="text-2xl">🧑‍🏫</span><div><p class="font-semibold">Daily mentor sessions</p><p class="text-sm">Get personalised support from industry experts</p></div></div>
+</div>`
+                },
+
+                // 5. Program Structure
+                {
+                    type: 'nurture',
+                    id: 'info5',
+                    title: 'Program Structure',
+                    text: 'Follow a clear 6‑step journey from learning fundamentals to landing your dream job.',
+                    // Add emojis to each step for a friendlier, more engaging appearance
+                    visual: `<ol class="space-y-3 text-left text-gray-700 mt-6 ml-2 list-decimal list-inside">
+    <li><strong>Learn 📚:</strong> 1‑on‑1 mentor‑led training with unlimited doubt support (Weeks 1–12)</li>
+    <li><strong>Certify 📜:</strong> Earn 3+ certificates from IIT Kharagpur, Google & WorkSkills (Weeks 12–14)</li>
+    <li><strong>Build 🛠️:</strong> Work on 8+ live projects from top startups (Weeks 14–20)</li>
+    <li><strong>Intern 💼:</strong> In‑built internship with stipend up to ₹15k/month (Weeks 20–28)</li>
+    <li><strong>Prep 📝:</strong> ATS‑friendly resume, LinkedIn optimisation & mock interviews (Weeks 28–30)</li>
+    <li><strong>Get a Job 🎯:</strong> Job offers with minimum ₹5.0 LPA (Weeks 30+)</li>
+</ol>`
+                },
+
+                // 6. Programs Offered → interactive question
+                {
+                    type: 'visual-mcq',
+                    id: 'info6',
+                    title: 'Which program are you interested in?',
+                    options: [
+                        { value: 'Gen AI', text: 'Gen AI', icon: '🤖' },
+                        { value: 'Prompt Engineering', text: 'Prompt Engineering', icon: '💬' },
+                        { value: 'Data Analytics', text: 'Data Analytics', icon: '📊' },
+                        { value: 'Data Science', text: 'Data Science', icon: '🧠' },
+                        { value: 'Digital Marketing', text: 'Digital Marketing', icon: '📣' }
+                    ]
+                },
+
+                // 7. Student Placements Showcase
+                {
+                    type: 'nurture',
+                    id: 'info7',
+                    title: 'Student Placements Showcase',
+                    text: 'See how our students turned their skills into success stories.',
+                    // Display plain success images in an auto‑scrolling carousel. Images slide continuously to the left.
+                    visual: `<div class="overflow-hidden mt-6">
+    <div class="flex space-x-4 animate-carousel">
+        <img src="https://trainity.in/webp_images/img1.webp" alt="Reine D. B." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img2.webp" alt="Sakshi G." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img3.webp" alt="Devika S. K." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img4.webp" alt="Sumit S." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img5.webp" alt="Narasimha V." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img6.webp" alt="Sanskar H." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img7.webp" alt="Divya R." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img8.webp" alt="Shruti N." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img9.webp" alt="Nishanth N." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img10.webp" alt="Manoj K." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <!-- Duplicate the images to ensure a seamless loop effect during scrolling -->
+        <img src="https://trainity.in/webp_images/img1.webp" alt="Reine D. B." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img2.webp" alt="Sakshi G." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img3.webp" alt="Devika S. K." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img4.webp" alt="Sumit S." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img5.webp" alt="Narasimha V." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img6.webp" alt="Sanskar H." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img7.webp" alt="Divya R." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img8.webp" alt="Shruti N." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img9.webp" alt="Nishanth N." class="h-44 w-32 object-cover rounded-lg shadow-md">
+        <img src="https://trainity.in/webp_images/img10.webp" alt="Manoj K." class="h-44 w-32 object-cover rounded-lg shadow-md">
+    </div>
+</div>`
+                },
+
+                // 8. Job assurance & assistance
+                {
+                    type: 'nurture',
+                    id: 'info8',
+                    title: 'Job Assurance & Assistance',
+                    text: 'We guarantee your success and support you at every step of your placement journey.',
+                    visual: `<div class="space-y-5 mt-6">
+    <div class="flex flex-col items-center space-y-1">
+        <div class="text-4xl">🛡️</div>
+        <p class="font-semibold text-lg text-gray-800">100% Job Assurance</p>
+        <p class="text-gray-700 text-sm">Min CTC of ₹5.0 LPA & ₹0 if unplaced</p>
+    </div>
+    <ul class="space-y-3 text-left text-gray-700">
+        <li><span class="mr-2">🆓</span> Pay ₹0 if unplaced</li>
+        <li><span class="mr-2">📅</span> Next cohort starts on 27th Jan 2025</li>
+        <li><span class="mr-2">🔁</span> Six‑level job assistance program</li>
+        <li><span class="mr-2">🤝</span> Interview prep, resume building & networking support</li>
+    </ul>
+</div>`
+                },
+
+                // 9. Join us today – call to action
+                {
+                    type: 'nurture',
+                    id: 'info9',
+                    title: 'Join Us Today',
+                    text: 'Unlock your dream career with WorkSkills. Let’s start your journey to success!',
+                    // Replace the image card with a simple motivational visual to make the CTA more relevant.
+                    visual: `<div class="flex flex-col items-center justify-center space-y-4 mt-4">
+    <div class="text-6xl">🚀</div>
+    <p class="text-lg font-semibold text-gray-800">Ready to launch your career?</p>
+    <p class="text-base text-gray-600 max-w-xs">Join thousands of learners already on their way to success.</p>
+</div>`
+                },
+
+                // ---
+                // (Old info screens removed to avoid duplication; see new info definitions above.)
 
                 // --- Phase 3: High-Commitment Details ---
                 { id: 'degree', title: "What's your highest qualification?", type: 'visual-mcq', grid: 'grid-cols-2 sm:grid-cols-3', options: [{ value: 'B.Tech/B.E.', text: 'B.Tech/B.E.', icon: '⚙️' }, { value: 'B.Com', text: 'B.Com', icon: '📊' }, { value: 'BA', text: 'B.A.', icon: '🎨' }, { value: 'BCA', text: 'BCA', icon: '💻' }, { value: 'MBA', text: 'MBA', icon: '📈' }, { value: 'Other', text: 'Other', icon: '🌐' }] },
                 { id: 'collegeName', title: 'Which college are you from?', type: 'text-input', placeholder: 'e.g., IIT Bombay', condition: (data) => ['College Student', 'Recent Graduate'].includes(data.status), cta: 'Next' },
                 { id: 'city', title: 'Where are you located?', type: 'dropdown', options: ['Mumbai', 'Delhi', 'Bengaluru', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Other'] },
-                { id: 'age', title: 'What is your age?', type: 'visual-mcq', grid: 'grid-cols-2', options: [{ value: '18-21', text: '18-21', icon: '🌱' }, { value: '22-24', text: '22-24', icon: '🏗️' }, { value: '25-28', text: '25-28', icon: '🚀' }, { value: '28+', text: '28+', icon: '🏆' }] },
+                {
+                    id: 'age', title: 'What is your age?', type: 'visual-mcq', options: [
+                        { value: '18', text: '18', icon: '' },
+                        { value: '19', text: '19', icon: '' },
+                        { value: '20', text: '20', icon: '' },
+                        { value: '21', text: '21', icon: '' },
+                        { value: '22', text: '22', icon: '' },
+                        { value: '23', text: '23', icon: '' },
+                        { value: '24', text: '24', icon: '' },
+                        { value: '25', text: '25', icon: '' },
+                        { value: '26', text: '26', icon: '' },
+                        { value: '27', text: '27', icon: '' },
+                        { value: '28', text: '28', icon: '' },
+                        { value: '29', text: '29', icon: '' },
+                        { value: '30', text: '30', icon: '' },
+                        { value: '31', text: '31', icon: '' },
+                        { value: '32', text: '32', icon: '' },
+                        { value: '33', text: '33', icon: '' },
+                        { value: '34', text: '34', icon: '' },
+                        { value: '35', text: '35', icon: '' },
+                        { value: '36', text: '36', icon: '' },
+                        { value: '37', text: '37', icon: '' },
+                        { value: '38', text: '38', icon: '' },
+                        { value: '39', text: '39', icon: '' },
+                        { value: '40', text: '40', icon: '' },
+                        { value: '41', text: '41', icon: '' },
+                        { value: '42', text: '42', icon: '' },
+                        { value: '43', text: '43', icon: '' },
+                        { value: '44', text: '44', icon: '' },
+                        { value: '45', text: '45', icon: '' }
+                    ]
+                },
                 { id: 'gender', title: 'What is your gender?', type: 'visual-mcq', grid: 'grid-cols-2', options: [{ value: 'Male', text: 'Male', icon: '👨' }, { value: 'Female', text: 'Female', icon: '👩' }] },
                 { id: 'salary', title: 'Tell us about your salary goals.', type: 'dual-slider', currentLabel: 'Your Current Annual Salary (CTC)', targetLabel: 'Your Target Annual Salary (CTC)', fresherCheckbox: true },
                 { id: 'budget', title: 'What is your budget for a program that guarantees results?', type: 'visual-mcq', grid: 'grid-cols-2 sm:grid-cols-3', options: [{ value: '<₹5K', text: '<₹5K', icon: '🪙' }, { value: '₹5K-₹10k', text: '₹5K-₹10k', icon: '💸' }, { value: '₹10K-₹30K', text: '₹10K-₹30K', icon: '💵' }, { value: '₹30K-₹50K', text: '₹30K-₹50K', icon: '💴' }, { value: '₹50K-₹80K', text: '₹50K-₹80K', icon: '💶' }, { value: '₹80K-₹1.2L', text: '₹80K-₹1.2L', icon: '💎' }] },
-                { id: 'enrollTimeline', title: 'How soon are you ready to start?', type: 'visual-mcq', grid: 'grid-cols-2', options: [{ value: 'Right away!', text: 'Right away!', icon: '⚡️' }, { value: 'Next 2-3 weeks', text: 'In 2-3 weeks', icon: '🗓️' }, { value: 'This month', text: 'This month', icon: '📅' }, { value: 'Exploring', text: 'Just exploring', icon: '🤔' }] },
-                { id: 'final', title: "You're all set, {{name}}!", subtext: "Provide your email to get your report. Our career advisor will call you to discuss your personalized plan.", type: 'final', cta: 'Get My Action Plan' }
+                {
+                    id: 'enrollTimeline', title: 'How soon are you ready to start?', type: 'visual-mcq', options: [
+                        { value: 'Right away', text: 'Right away', icon: '⚡️' },
+                        { value: '1–2 days', text: '1–2 days', icon: '📆' },
+                        { value: '1–2 weeks', text: '1–2 weeks', icon: '🗓️' },
+                        { value: 'This month', text: 'This month', icon: '📅' },
+                        { value: 'Next few months', text: 'Next few months', icon: '⏳' },
+                        { value: 'Unsure', text: 'Unsure', icon: '❓' }
+                    ]
+                },
+                { id: 'final', title: "You're all set, {{name}}!", subtext: "Provide your email to get your report. Our career advisor will call you to discuss your personalized plan.", type: 'final', fields: [{ id: 'email', placeholder: 'Enter your email', type: 'email' }], cta: 'Get My Action Plan' }
             ];
+            // --- Variation 4 ordering: ask practical preferences first, then contact, then status/gender, then goals ---
+            {
+                // Define the sequence of screens. We intersperse nine informational nurture screens
+                // sourced from the Trainity variation page to educate and inspire users at key points.
+                const order = [
+                    // Begin with a hook and nurture screens interspersed throughout the quiz
+                    'start', 'info1',
+                    'timeCommitment',
+                    'programDuration', 'info2',
+                    'importantFeatures', 'info3',
+                    'device',
+                    'phone', 'info4',
+                    'name',
+                    'status', 'info5',
+                    'gender', 'goal', 'info6',
+                    'frustration', 'info7',
+                    'degree', 'info8',
+                    'collegeName', 'city', 'age',
+                    'salary', 'info9',
+                    'budget',
+                    'enrollTimeline',
+                    'final'
+                ];
+                quizFlow.sort((a, b) => order.indexOf(a.id || a.id) - order.indexOf(b.id || b.id));
+            }
 
             let currentScreenIndex = 0;
             const formData = {};
+
+            // Load any previously saved quiz progress from localStorage
+            try {
+                const storedData = localStorage.getItem('quizFormData');
+                const storedIndex = localStorage.getItem('quizScreenIndex');
+                if (storedData) {
+                    Object.assign(formData, JSON.parse(storedData));
+                    if (storedIndex !== null && !isNaN(parseInt(storedIndex))) {
+                        currentScreenIndex = parseInt(storedIndex);
+                    }
+                }
+            } catch (e) {
+                console.warn('Could not load saved progress:', e);
+            }
+
+            // Save quiz progress to localStorage
+            const saveProgress = () => {
+                try {
+                    localStorage.setItem('quizFormData', JSON.stringify(formData));
+                    localStorage.setItem('quizScreenIndex', String(currentScreenIndex));
+                } catch (e) {
+                    console.warn('Could not save progress:', e);
+                }
+            };
             const screensContainer = document.getElementById('screens');
             const backBtn = document.getElementById('backBtn');
-            const footerNav = document.getElementById('footer-nav');
+            // The back button container has been removed; we toggle visibility on the button itself
 
             const navigate = (direction) => {
                 let newIndex = currentScreenIndex + direction;
@@ -277,18 +769,103 @@
 
                 if (newIndex >= 0 && newIndex < quizFlow.length) {
                     currentScreenIndex = newIndex;
+                    // Persist progress after each navigation step
+                    saveProgress();
+                    // Send the partially filled data to the database/Sheet so we capture each step.
+                    try {
+                        // Only send data if this step hasn't been sent for this phone yet.
+                        let shouldSend = true;
+                        const phoneKey = formData.phone || '';
+                        if (phoneKey) {
+                            const lastSentKey = 'quizLastSentStep_' + phoneKey;
+                            const lastSent = parseInt(localStorage.getItem(lastSentKey) || '-1');
+                            if (!isNaN(lastSent) && currentScreenIndex <= lastSent) {
+                                shouldSend = false;
+                            } else {
+                                localStorage.setItem(lastSentKey, String(currentScreenIndex));
+                            }
+                        }
+                        if (shouldSend) {
+                            const submissionPayload = normalizeForSheet(formData);
+                            submissionPayload.recordId = formData.phone || '';
+                            submissionPayload.step = currentScreenIndex;
+                            submissionPayload.session_id = SESSION_ID;
+                            sendToSheet(submissionPayload);
+                        }
+                    } catch (e) {
+                        console.warn('Partial submission failed (ignored):', e);
+                    }
                     renderScreen();
                 } else if (newIndex >= quizFlow.length) {
+                    // Final submission screen: save progress one last time
+                    saveProgress();
                     renderThankYou();
                 }
             };
 
             const renderThankYou = () => {
                 const name = formData.name ? formData.name.split(' ')[0] : 'Congratulations';
-                // 🚀 Send to Google Sheet
-                sendToSheet(normalizeForSheet(formData));
-                document.body.innerHTML = `<div class="w-screen h-screen flex flex-col items-center justify-center text-center p-4 bg-white"><img src="images/common/workskills_black.svg" alt="WorkSkills Logo" class="h-12 mb-8"><div class="text-green-500"><svg class="w-24 h-24" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.207a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></div><h2 class="text-4xl font-extrabold mt-4">Thank You, ${name}!</h2><p class="text-gray-600 text-xl max-w-md mt-2">Your personalized Action Plan is on its way. A career advisor will be in touch shortly!</p><div class="mt-6 bg-gray-100 p-4 rounded-lg w-full max-w-sm"><h3 class="font-bold text-lg">Quick Wins for You:</h3><ul class="text-left mt-2 space-y-1 text-sm"><li><span class="font-semibold">Goal: ${formData.goal ? formData.goal.join(', ') : 'Achieve your goals'}</span> - Start by updating your LinkedIn headline to reflect this ambition.</li><li><span class="font-semibold">Frustration: ${formData.frustration ? formData.frustration[0] : 'Overcome challenges'}</span> - Watch one free Workskills webinar on this topic this week.</li></ul></div></div>`;
+                // 🚀 Send to Google Sheet one last time if this step hasn't been sent
+                const finalPayload = normalizeForSheet(formData);
+                finalPayload.recordId = formData.phone || '';
+                finalPayload.step = currentScreenIndex;
+                // check if final step already sent to avoid duplicates
+                try {
+                    let shouldSend = true;
+                    const phoneKey = formData.phone || '';
+                    // if (phoneKey) {
+                    //     const lastSentKey = 'quizLastSentStep_' + phoneKey;
+                    //     const lastSent = parseInt(localStorage.getItem(lastSentKey) || '-1');
+                    //     if (!isNaN(lastSent) && currentScreenIndex <= lastSent) {
+                    //         shouldSend = false;
+                    //     } else {
+                    //         localStorage.setItem(lastSentKey, String(currentScreenIndex));
+                    //     }
+                    // }
+                    if (shouldSend) {
+                        finalPayload.session_id = SESSION_ID;
+                        sendToSheet(finalPayload);
+                    }
+                } catch (e) {
+                    console.warn('Final submission failed (ignored):', e);
+                }
+                // Build an animated thank you screen with a loading indicator and redirect
+                document.body.innerHTML = `<div class="w-screen h-screen flex flex-col items-center justify-center text-center p-4 bg-white">
+                    <img src="images/common/workskills_black.svg" alt="WorkSkills Logo" class="h-12 mb-8">
+                    <div class="text-green-500 mb-4">
+                        <svg class="w-20 h-20 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.207a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-4xl font-extrabold">Thank You, ${name}!</h2>
+                    <p class="text-gray-600 text-lg max-w-md mt-2">Your personalized Action Plan is on its way. A career advisor will be in touch shortly!</p>
+                    <div class="mt-6 bg-gray-100 p-4 rounded-lg w-full max-w-sm">
+                        <h3 class="font-bold text-lg mb-2">Quick Wins for You:</h3>
+                        <ul class="text-left space-y-1 text-sm">
+                            <li><span class="font-semibold">Goal: ${formData.goal ? formData.goal.join(', ') : 'Achieve your goals'}</span> - Update your LinkedIn headline to reflect this ambition.</li>
+                            <li><span class="font-semibold">Frustration: ${formData.frustration ? formData.frustration[0] : 'Overcome challenges'}</span> - Watch a free WorkSkills webinar on this topic this week.</li>
+                        </ul>
+                    </div>
+                    <div id="redirect-timer" class="mt-8 flex items-center space-x-2 text-gray-700 text-sm font-medium">
+                        <svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                        </svg>
+                        <span>Redirecting you in <span id="countdown">5</span> seconds...</span>
+                    </div>
+                </div>`;
                 console.log("Final Data:", formData);
+                // Countdown timer and redirect after 5 seconds
+                let countdown = 5;
+                const timerEl = document.getElementById('countdown');
+                const interval = setInterval(() => {
+                    countdown--;
+                    if (timerEl) timerEl.textContent = String(countdown);
+                    if (countdown <= 0) {
+                        clearInterval(interval);
+                        window.location.href = 'https://linkly.link/2FaC5';
+                    }
+                }, 1000);
             }
 
             const renderScreen = () => {
@@ -296,9 +873,11 @@
                 const screenData = quizFlow[currentScreenIndex];
                 if (currentScreenIndex > 0) {
                     document.getElementById('progress-section').classList.remove('hidden');
-                    footerNav.classList.remove('hidden');
+                    // Show the back button when not on the first screen
+                    backBtn.classList.remove('hidden');
                 } else {
-                    footerNav.classList.add('hidden');
+                    // Hide the back button on the very first screen
+                    backBtn.classList.add('hidden');
                 }
                 updateProgress();
 
@@ -309,22 +888,52 @@
 
                 switch (screenData.type) {
                     case 'visual-mcq':
-                    case 'visual-mcq-multi':
-                        content = `<div class="text-center mb-4 stagger-1"><h2 class="text-3xl font-extrabold">${title}</h2></div><div class="grid ${screenData.grid || 'grid-cols-2'} gap-3">${screenData.options.map((opt, index) => `<div class="option-card bg-white rounded-xl p-3 flex flex-col items-center justify-center text-center shadow-md aspect-[4/3] stagger-item stagger-item-${index + 1}" data-value="${opt.value}"><div class="text-3xl mb-1">${opt.icon || ''}</div><span class="font-semibold text-sm text-gray-800">${opt.text}</span></div>`).join('')}</div>`;
+                    case 'visual-mcq-multi': {
+                        // Instruction note for multi-select screens
+                        const instruction = (screenData.type === 'visual-mcq-multi' && screenData.limit) ? `<p class="text-sm text-gray-500 mt-1 mb-2">Select up to ${screenData.limit} option${screenData.limit > 1 ? 's' : ''}</p>` : '';
+                        // Determine if this is the age selection screen (render as a grid of numbers)
+                        const isAgeScreen = screenData.id === 'age';
+                        const optionsHtml = screenData.options.map((opt, index) => {
+                            if (isAgeScreen) {
+                                // For age selection, render compact centred cards without animations
+                                return `<div class="option-card bg-white rounded-xl p-4 flex items-center justify-center shadow-md border-2 border-gray-100" data-value="${opt.value}"><span class="text-lg font-semibold">${opt.text}</span></div>`;
+                            } else {
+                                // Standard vertically stacked card with icon and label, including stagger animations
+                                return `<div class="option-card vertical bg-white rounded-2xl py-6 px-5 flex items-center w-full shadow-md border-2 border-gray-100 stagger-item stagger-item-${index + 1}" data-value="${opt.value}"><div class="text-5xl mr-5">${opt.icon || ''}</div><span class="text-gray-800 text-xl">${opt.text}</span></div>`;
+                            }
+                        }).join('');
+                        // Use a grid layout for the age screen; otherwise stack vertically
+                        const containerClass = isAgeScreen ? 'grid grid-cols-4 sm:grid-cols-6 gap-3' : 'flex flex-col space-y-5';
+                        let nextSection = '';
                         if (screenData.type === 'visual-mcq-multi') {
-                            content += `<div class="text-center mt-6 flex-shrink-0 opacity-0 stagger-item stagger-item-${screenData.options.length + 1}"><button id="multi-next-btn" class="bg-[var(--brand-black)] text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-gray-800 transition-all disabled:opacity-50" disabled>Next</button></div>`;
+                            // Multi-select screens include a Next button that is disabled until at least one option is selected
+                            nextSection = `<div class="mt-6 text-center stagger-3"><button class="multi-next-btn bg-[var(--brand-primary)] text-white font-bold py-4 px-10 rounded-xl shadow-md transition-all hover:bg-green-700 disabled:opacity-50" disabled>Next</button></div>`;
                         }
+                        content = `<div class="text-center mb-4 stagger-1"><h2 class="text-3xl font-extrabold text-black">${title}</h2>${instruction}</div><div class="${containerClass}">${optionsHtml}</div>${nextSection}`;
                         break;
+                    }
                     case 'hook':
                         content = `<div class="text-center p-2 flex flex-col items-center justify-center stagger-1"><h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">${title}</h2><p class="text-gray-600 mt-2 text-base md:text-lg stagger-2">${screenData.text || ''}</p><div class="my-6 max-w-sm w-full stagger-2">${screenData.visual}</div><button class="form-submit-btn bg-[var(--brand-primary)] text-white font-bold py-4 px-12 rounded-xl shadow-lg shadow-green-500/30 hover:bg-green-700 transition-all transform hover:scale-105 stagger-3">${screenData.cta}</button></div>`;
                         break;
                     case 'text-input':
                     case 'final':
-                        const fields = screenData.id ? [{ id: screenData.id, placeholder: screenData.placeholder, type: 'text', validation: screenData.validation }] : screenData.fields || [{ id: 'email', placeholder: 'Enter your E-Mail', type: 'email', validation: screenData.validation }];
-                        content = `<div class="text-center p-2 flex flex-col items-center justify-center stagger-1"><h2 class="text-3xl font-extrabold leading-tight">${title}</h2><p class="text-gray-600 mt-2 text-base md:text-lg stagger-2">${screenData.subtext || ''}</p><div class="mt-8 space-y-2 w-full max-w-sm mx-auto stagger-3">${fields.map(field => `<div><input type="${field.type}" id="${field.id}" class="w-full p-4 border-2 rounded-lg text-lg ws-input" placeholder="${field.placeholder}" value="${formData[field.id] || ''}"><p id="${field.id}-error" class="text-red-500 text-sm text-left h-4"></p></div>`).join('')}</div><button class="form-submit-btn mt-6 bg-[var(--brand-primary)] text-white font-bold py-4 px-12 rounded-xl shadow-lg shadow-green-500/30 hover:bg-green-700 transition-all transform hover:scale-105 disabled:opacity-50 stagger-3">${screenData.cta}</button></div>`;
+                        const fields = screenData.id ? [{ id: screenData.id, placeholder: screenData.placeholder, type: 'text', validation: screenData.validation }] : screenData.fields || [{ id: 'email', placeholder: 'Enter your email', type: 'email', validation: screenData.validation }];
+                        content = `<div class="text-center p-2 flex flex-col items-center justify-center stagger-1"><h2 class="text-3xl font-extrabold leading-tight">${title}</h2><p class="text-gray-600 mt-2 text-base md:text-lg stagger-2">${screenData.subtext || ''}</p><div class="mt-8 space-y-2 w-full max-w-sm mx-auto stagger-3">${fields.map(field => `<div><input type="${field.type}" id="${field.id}" autocomplete="${field.id === 'name' ? 'name' : field.id === 'phone' ? 'tel' : field.id === 'email' ? 'email' : ''}" class="w-full p-4 border-2 rounded-lg text-lg ws-input" placeholder="${field.placeholder}" value="${formData[field.id] || localStorage.getItem(field.id) || ''}"><p id="${field.id}-error" class="text-red-500 text-sm text-left h-4"></p></div>`).join('')}</div><button class="form-submit-btn mt-6 bg-[var(--brand-primary)] text-white font-bold py-4 px-12 rounded-xl shadow-lg shadow-green-500/30 hover:bg-green-700 transition-all transform hover:scale-105 disabled:opacity-50 stagger-3">${screenData.cta}</button></div>`;
                         break;
                     case 'dropdown':
-                        content = `<div class="text-center p-6 sm:p-8 flex flex-col justify-center w-full max-w-md mx-auto stagger-1"><h2 class="text-3xl font-extrabold">${title}</h2><div class="mt-8 stagger-2"><select id="${screenData.id}" class="w-full p-4 border-2 rounded-lg text-lg ws-select"><option value="" disabled selected>Select your city</option>${screenData.options.map(o => `<option value="${o}">${o}</option>`).join('')}</select></div></div>`;
+                        // Render a dropdown with a Next button. Users must explicitly click Next to proceed.
+                        content = `<div class="text-center p-6 sm:p-8 flex flex-col justify-center w-full max-w-md mx-auto stagger-1">
+    <h2 class="text-3xl font-extrabold">${title}</h2>
+    <div class="mt-8 stagger-2">
+        <select id="${screenData.id}" class="w-full p-4 border-2 rounded-lg text-lg ws-select">
+            <option value="" disabled selected>Select your city</option>
+            ${screenData.options.map(o => `<option value="${o}">${o}</option>`).join('')}
+        </select>
+    </div>
+    <div class="mt-6 stagger-3">
+        <button class="dropdown-next-btn bg-[var(--brand-primary)] text-white font-bold py-4 px-10 rounded-xl shadow-md transition-all hover:bg-green-700 disabled:opacity-50" disabled>Next</button>
+    </div>
+</div>`;
                         break;
                     case 'tabs':
                         content = `<div class="text-center p-2 md:p-6 flex flex-col items-center justify-center w-full max-w-md mx-auto stagger-1"><h2 class="text-3xl font-extrabold leading-tight">${title}</h2><div class="mt-8 grid grid-cols-2 gap-3 w-full stagger-2">${screenData.options.map((opt, index) => `<button class="option-tab bg-white p-4 rounded-lg border-2 stagger-item stagger-item-${index + 1}" data-value="${opt}">${opt}</button>`).join('')}</div></div>`
@@ -333,7 +942,14 @@
                         content = `<div class="text-center p-2 md:p-6 flex flex-col items-center justify-center w-full max-w-md mx-auto stagger-1"><h2 class="text-3xl font-extrabold leading-tight">${title}</h2><div class="w-full mt-8 space-y-8 stagger-2"><div><label class="font-semibold">${screenData.currentLabel}</label><div class="flex items-center space-x-4"><input type="range" id="currentSalary" class="w-full" min="0" max="50" value="0"><p id="current-value" class="text-lg font-bold text-gray-800 w-24 text-right"></p></div><div class="mt-2 text-left"><label class="text-sm"><input type="checkbox" id="fresher-checkbox"> I'm a Fresher</label></div></div><div><label class="font-semibold">${screenData.targetLabel}</label><div class="flex items-center space-x-4"><input type="range" id="targetSalary" class="w-full" min="0" max="50" value="5"><p id="target-value" class="text-lg font-bold text-[var(--brand-primary)] w-24 text-right"></p></div></div></div><button class="form-submit-btn mt-8 bg-[var(--brand-black)] text-white font-bold py-4 px-12 rounded-xl shadow-lg transition-all stagger-3">Next</button></div>`;
                         break;
                     case 'nurture':
-                        content = `<div class="p-6 rounded-lg flex flex-col items-center justify-center text-center min-h-[300px] stagger-1"><h2 class="text-3xl font-extrabold">${screenData.title}</h2><p class="text-gray-600 mt-2 max-w-md stagger-2">${screenData.text}</p><div class="my-6 w-full stagger-3">${screenData.visual}</div></div>`;
+                        // Nurture screens: present informational content in a polished card with a timed Next button.
+                        // Increase padding and spacing on nurture screens for a more breathable layout
+                        content = `<div class="bg-white rounded-2xl shadow-lg p-8 sm:p-10 max-w-lg w-full mx-auto flex flex-col items-center justify-center text-center space-y-6 stagger-1">
+    <h2 class="text-3xl font-extrabold">${screenData.title}</h2>
+    <p class="text-gray-600 text-base">${screenData.text}</p>
+    <div class="w-full">${screenData.visual}</div>
+    <button id="nurture-next-btn" class="mt-4 bg-[var(--brand-primary)] text-white font-bold py-3 px-8 rounded-xl shadow-md transition-all disabled:opacity-50" disabled>Next</button>
+</div>`;
                         break;
                 }
                 screenWrapper.innerHTML = content;
@@ -346,28 +962,51 @@
                 if (screenData.type === 'visual-mcq') {
                     document.querySelectorAll('.option-card').forEach(card => card.addEventListener('click', () => {
                         formData[screenData.id] = card.dataset.value;
-                        setTimeout(() => navigate(1), 200);
+                        // Shorter delay for snappier single-choice interaction
+                        setTimeout(() => navigate(1), 100);
                     }));
                 } else if (screenData.type === 'visual-mcq-multi') {
+                    // Multi-select interactions: allow multiple selections (up to the defined limit) without auto-advancing.
                     formData[screenData.id] = formData[screenData.id] || [];
-                    const nextBtn = document.getElementById('multi-next-btn');
+                    const nextBtn = document.querySelector('.multi-next-btn');
+                    if (nextBtn) {
+                        // Disable the Next button initially when there are no selections
+                        nextBtn.disabled = !formData[screenData.id] || formData[screenData.id].length === 0;
+                        nextBtn.classList.toggle('opacity-50', nextBtn.disabled);
+                    }
                     document.querySelectorAll('.option-card').forEach(card => {
-                        if (formData[screenData.id].includes(card.dataset.value)) card.classList.add('multi-selected');
+                        // Restore previously selected options on back navigation
+                        if (formData[screenData.id].includes(card.dataset.value)) {
+                            card.classList.add('multi-selected');
+                        }
                         card.addEventListener('click', () => {
                             const value = card.dataset.value;
                             const selected = formData[screenData.id];
                             if (selected.includes(value)) {
+                                // Deselect the value
                                 formData[screenData.id] = selected.filter(v => v !== value);
                                 card.classList.remove('multi-selected');
                             } else if (selected.length < screenData.limit) {
+                                // Select the value
                                 formData[screenData.id].push(value);
                                 card.classList.add('multi-selected');
                             }
-                            nextBtn.disabled = formData[screenData.id].length === 0;
+                            // Update Next button state based on whether at least one option is selected
+                            if (nextBtn) {
+                                const hasSelection = formData[screenData.id] && formData[screenData.id].length > 0;
+                                nextBtn.disabled = !hasSelection;
+                                nextBtn.classList.toggle('opacity-50', nextBtn.disabled);
+                            }
                         });
                     });
-                    nextBtn.disabled = formData[screenData.id].length === 0;
-                    nextBtn.addEventListener('click', () => navigate(1));
+                    // Bind the Next button to navigate when clicked and a selection has been made
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', () => {
+                            if (formData[screenData.id] && formData[screenData.id].length > 0) {
+                                navigate(1);
+                            }
+                        });
+                    }
                 } else if (screenData.type === 'hook') {
                     document.querySelector('.form-submit-btn').addEventListener('click', () => navigate(1));
                 } else if (screenData.type === 'text-input' || screenData.type === 'final') {
@@ -398,6 +1037,12 @@
                     inputs.forEach((input, i) => {
                         input.addEventListener('input', () => {
                             formData[input.id] = input.value;
+                            // Persist this field to localStorage for auto-prefill on subsequent visits
+                            try {
+                                localStorage.setItem(input.id, input.value);
+                            } catch (e) {
+                                console.warn('Unable to store field value', e);
+                            }
                             validateField(input, fields[i].validation);
                             validateAll();
                         });
@@ -428,19 +1073,52 @@
                             formData[screenData.id] = tab.dataset.value;
                             document.querySelectorAll('.option-tab').forEach(t => t.classList.remove('selected', 'bg-green-100', 'border-green-500'));
                             tab.classList.add('selected', 'bg-green-100', 'border-green-500');
-                            setTimeout(() => navigate(1), 200);
+                            // Shorter delay for tab selection
+                            setTimeout(() => navigate(1), 100);
                         })
                     })
                 } else if (screenData.type === 'dropdown') {
                     const select = screensContainer.querySelector('select');
-                    select.addEventListener('change', () => {
-                        formData[screenData.id] = select.value;
-                        if (select.value) {
-                            setTimeout(() => navigate(1), 300);
-                        }
-                    });
+                    const nextBtn = screensContainer.querySelector('.dropdown-next-btn');
+                    if (select) {
+                        // When the user selects a city, enable the Next button
+                        select.addEventListener('change', () => {
+                            formData[screenData.id] = select.value;
+                            if (select.value) {
+                                if (nextBtn) {
+                                    nextBtn.disabled = false;
+                                    nextBtn.classList.remove('opacity-50');
+                                }
+                            } else {
+                                if (nextBtn) {
+                                    nextBtn.disabled = true;
+                                    nextBtn.classList.add('opacity-50');
+                                }
+                            }
+                        });
+                    }
+                    // On clicking Next, proceed to the next screen if a selection is made
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', () => {
+                            if (!nextBtn.disabled) {
+                                navigate(1);
+                            }
+                        });
+                    }
                 } else if (screenData.type === 'nurture') {
-                    setTimeout(() => navigate(1), 3500); // Auto-advance nurture screen
+                    // For nurture screens, show a Next button that remains disabled briefly before enabling navigation
+                    const nextBtn = document.getElementById('nurture-next-btn');
+                    if (nextBtn) {
+                        // Enable after 2.5 seconds
+                        setTimeout(() => {
+                            nextBtn.disabled = false;
+                        }, 2500);
+                        nextBtn.addEventListener('click', () => {
+                            if (!nextBtn.disabled) {
+                                navigate(1);
+                            }
+                        });
+                    }
                 }
             };
 
@@ -458,12 +1136,21 @@
             }
 
             const updateProgress = () => {
-                if (currentScreenIndex === 0) return;
+                const stepCounterEl = document.getElementById('step-counter');
+                if (currentScreenIndex === 0) {
+                    // On the first screen, clear the step counter and return early.
+                    if (stepCounterEl) stepCounterEl.textContent = '';
+                    return;
+                }
                 const progress = ((currentScreenIndex - 1) / (quizFlow.length - 2)) * 100;
                 document.getElementById('progressBar').style.width = `${progress}%`;
                 document.getElementById('progress-per').innerText = `${Math.round(progress)}%`;
-                const messages = ["Phase 1: Profiling You", "Phase 2: Analyzing Goals", "Phase 3: Finalizing"];
-                document.getElementById('progressText').innerHTML = `⚙️ <span class="font-bold">${messages[Math.floor((currentScreenIndex - 1) / ((quizFlow.length - 2) / 3))] || messages[2]}</span>`;
+                // Update the header step counter (e.g., 7/21)
+                if (stepCounterEl) {
+                    const totalSteps = quizFlow.length;
+                    stepCounterEl.textContent = `${currentScreenIndex}/${totalSteps}`;
+                }
+                // Remove phase messages as they are hidden via CSS; do not update progressText
             };
 
             backBtn.addEventListener('click', () => navigate(-1));
@@ -471,7 +1158,7 @@
         });
 
         // === Sheet endpoint config ===
-        const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyoytb0w4jsTCeL7AVHSm5cf0qlOfS7KM5aoFzI2ssHFiqp5vUzUrLym2VuG-_GmNfT/exec'; // <- your /exec URL
+        const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzfWzv05ipGGX1qReai5aaotlZaJDF5X0DyVk5J3rW21ZiiMtG99H_JwUPXEsGV-0R6/exec'; // <- your /exec URL
         const SHEET_TOKEN = 'super-secret'; // must match Apps Script
 
         function normalizeForSheet(data) {
@@ -479,9 +1166,10 @@
             const join = v => Array.isArray(v) ? v.join(', ') : v ?? '';
             return {
                 token: SHEET_TOKEN,
+                session_id: '', // Will be set by caller
                 name: data.name,
                 phone: data.phone,
-                email: data.email,
+                final: data.final,
                 status: data.status,
                 goal: data.goal,                               // array OK (server joins)
                 frustration: data.frustration,                 // array OK (server joins)
@@ -502,6 +1190,8 @@
         }
 
         function sendToSheet(payload) {
+
+            console.log(payload)
             // Apps Script web apps can’t reliably set CORS; use no-cors so the write succeeds.
             // (You won’t be able to read the JSON response—this is expected.)
             try {
