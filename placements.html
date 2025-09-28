@@ -452,7 +452,7 @@
     // Initialize the application
     async function loadPlacements() {
       try {
-        const response = await fetch('placements_data.json');
+        const response = await fetch('placements_data_updated.json');
         allStudents = await response.json();
         
         // Initialize filtered students with all students
@@ -481,8 +481,8 @@
       const companySeed = student.NewCompanyName.replace(/\s+/g, '').toLowerCase();
       
       // Use different image services for variety
-      const avatarUrl = `https://picsum.photos/seed/${avatarSeed}/200/200`;
-      const companyUrl = `https://picsum.photos/seed/${companySeed}/120/60`;
+      const avatarUrl = `images/placements/placements_students/${student.Name.toLowerCase()}.jpg`;
+      const companyUrl = student.NewCompanyLogo;
       
       return `
         <div class="student-card" onclick="window.open('${student.LinkedInUrl}', '_blank')">
