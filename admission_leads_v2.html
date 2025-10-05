@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkSkills Career Action Plan Quiz</title>
     <link rel="shortcut icon" href="images/common/favicon.svg" type="image/x-icon">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -413,7 +412,8 @@
                 ? crypto.randomUUID()
                 : ('session_' + Date.now() + '_' + Math.random().toString(36).slice(2));
 
-            const quizFlow = [
+            // Allow re-assignment of the quizFlow array by using let (for variant filtering)
+            let quizFlow = [
                 // --- The Hook ---
                 { type: 'hook', id: 'start', title: 'Unlock Your <span class="text-[var(--brand-primary)]">Career Action Plan</span> in 2 Minutes', text: 'Get a FREE, data-driven report to land your dream job, tailored to your unique skills and goals.', visual: `<div class="p-4 bg-white border-2 border-gray-100 rounded-2xl shadow-xl max-w-sm mx-auto"><div class="border border-gray-100 rounded-lg p-4 text-left"><div class="flex items-center space-x-3 mb-4"><div class="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-gray-500">You</div><div><div class="h-4 bg-gray-200 rounded w-28"></div></div></div><p class="font-bold text-green-600 text-sm">Your Personalized Career Report</p><div class="mt-4 space-y-2"><p class="font-semibold text-sm">Recommended Roles:</p><div class="h-3 bg-gray-200 rounded w-full"></div><div class="h-3 bg-gray-200 rounded w-5/6"></div><div class="h-3 bg-gray-200 rounded w-1/2"></div></div></div></div>`, cta: "Start My Career Quiz" },
 
@@ -422,7 +422,7 @@
                 { id: 'name', title: "Great! And what's your full name?", type: 'text-input', placeholder: 'e.g., Priya Sharma', cta: 'Next' },
                 { id: 'status', title: 'Which of these best describes you?', type: 'visual-mcq', options: [{ value: 'College Student', text: 'College Student', icon: '🎓' }, { value: 'Recent Graduate', text: 'Recent Graduate', icon: '🎉' }, { value: 'Working Professional', text: 'Working Professional', icon: '💼' }] },
                 { id: 'goal', title: 'What’s the #1 career goal you want to achieve?', type: 'visual-mcq-multi', limit: 3, grid: 'grid-cols-2', options: [{ value: 'Secure First Job', text: 'Secure my first job', icon: '🚀' }, { value: 'Switch Career', text: 'Switch to a better field', icon: '🔄' }, { value: 'Get Salary Hike', text: 'Get a significant salary hike', icon: '💰' }, { value: 'Get Certified', text: 'Earn a recognized certificate', icon: '📜' }, { value: 'Master Skills', text: 'Master in-demand skills', icon: '🧠' }] },
-                { id: 'frustration', title: "What's the biggest challenge holding you back?", type: 'visual-mcq-multi', limit: 2, grid: 'grid-cols-2', options: [{ value: 'Degree Not Enough', text: 'My degree isn\'t enough', icon: '😥' }, { value: 'Lack Practical Skills', text: 'I lack practical skills', icon: '🛠️' }, { value: 'Not Enough Calls', text: 'Not getting interview calls', icon: '📞' }, { value: 'Stuck in Job', text: 'Stuck in a low-growth job', icon: '📉' }, { value: 'Confused', text: 'Confused about my career', icon: '🤔' }] },
+                { id: 'frustration', title: "What's the biggest challenge holding you back?", type: 'visual-mcq-multi', limit: 2, grid: 'grid-cols-2', options: [{ value: 'Degree Not Enough', text: 'My degree isn\'t enough', icon: '😥' }, { value: 'Lack Practical Skills', text: 'I lack practical skills', icon: '🧰' }, { value: 'Not Enough Calls', text: 'Not getting interview calls', icon: '📞' }, { value: 'Stuck in Job', text: 'Stuck in a low-growth job', icon: '📉' }, { value: 'Confused', text: 'Confused about my career', icon: '🤔' }] },
 
                 // Removed old nurture screen definitions to consolidate into the new info screens
 
@@ -455,10 +455,11 @@
                 {
                     type: 'nurture',
                     id: 'info1',
-                    title: 'Trusted by Learners',
-                    text: 'India’s #1 education platform loved by thousands of learners.',
+                    // Swap the headline and subheading so that the platform claim appears as the main title
+                    title: 'India’s #1 Education Platform',
+                    text: 'Trusted by Learners and loved by thousands across India.',
                     visual: `<div class="space-y-6 mt-4 text-gray-700">
-    <h3 class="text-2xl font-semibold text-center">India’s #1 Education Platform</h3>
+    <h3 class="text-2xl font-semibold text-center">Trusted by Learners</h3>
     <div class="flex justify-center space-x-6 text-center">
         <div><span class="block text-3xl font-bold text-[var(--brand-primary)]">1L+</span><span class="block text-sm">Learners</span></div>
         <div><span class="block text-3xl font-bold text-[var(--brand-primary)]">4.8★</span><span class="block text-sm">Google Rating</span></div>
@@ -574,9 +575,9 @@
                     title: 'Which program are you interested in?',
                     options: [
                         { value: 'Gen AI', text: 'Gen AI', icon: '🤖' },
-                        { value: 'Prompt Engineering', text: 'Prompt Engineering', icon: '💬' },
-                        { value: 'Data Analytics', text: 'Data Analytics', icon: '📊' },
-                        { value: 'Data Science', text: 'Data Science', icon: '🧠' },
+                        { value: 'Prompt Engineering', text: 'Prompt Engineering', icon: '🗒️' },
+                        { value: 'Data Analytics', text: 'Data Analytics', icon: '📈' },
+                        { value: 'Data Science', text: 'Data Science', icon: '🧪' },
                         { value: 'Digital Marketing', text: 'Digital Marketing', icon: '📣' }
                     ]
                 },
@@ -654,7 +655,7 @@
                 // (Old info screens removed to avoid duplication; see new info definitions above.)
 
                 // --- Phase 3: High-Commitment Details ---
-                { id: 'degree', title: "What's your highest qualification?", type: 'visual-mcq', grid: 'grid-cols-2 sm:grid-cols-3', options: [{ value: 'B.Tech/B.E.', text: 'B.Tech/B.E.', icon: '⚙️' }, { value: 'B.Com', text: 'B.Com', icon: '📊' }, { value: 'BA', text: 'B.A.', icon: '🎨' }, { value: 'BCA', text: 'BCA', icon: '💻' }, { value: 'MBA', text: 'MBA', icon: '📈' }, { value: 'Other', text: 'Other', icon: '🌐' }] },
+                { id: 'degree', title: "What's your highest qualification?", type: 'visual-mcq', grid: 'grid-cols-2 sm:grid-cols-3', options: [{ value: 'B.Tech/B.E.', text: 'B.Tech/B.E.', icon: '⚙️' }, { value: 'B.Com', text: 'B.Com', icon: '🧮' }, { value: 'BA', text: 'B.A.', icon: '🎨' }, { value: 'BCA', text: 'BCA', icon: '🖥️' }, { value: 'MBA', text: 'MBA', icon: '🏢' }, { value: 'Other', text: 'Other', icon: '🌐' }] },
                 { id: 'collegeName', title: 'Which college are you from?', type: 'text-input', placeholder: 'e.g., IIT Bombay', condition: (data) => ['College Student', 'Recent Graduate'].includes(data.status), cta: 'Next' },
                 { id: 'city', title: 'Where are you located?', type: 'dropdown', options: ['Mumbai', 'Delhi', 'Bengaluru', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Other'] },
                 {
@@ -704,30 +705,83 @@
                 },
                 { id: 'final', title: "You're all set, {{name}}!", subtext: "Provide your email to get your report. Our career advisor will call you to discuss your personalized plan.", type: 'final', fields: [{ id: 'email', placeholder: 'Enter your email', type: 'email' }], cta: 'Get My Action Plan' }
             ];
-            // --- Variation 4 ordering: ask practical preferences first, then contact, then status/gender, then goals ---
+            // --- Custom variant ordering and prioritisation ---
             {
-                // Define the sequence of screens. We intersperse nine informational nurture screens
-                // sourced from the Trainity variation page to educate and inspire users at key points.
-                const order = [
-                    // Begin with a hook and nurture screens interspersed throughout the quiz
-                    'start', 'info1',
-                    'timeCommitment',
-                    'programDuration', 'info2',
-                    'importantFeatures', 'info3',
-                    'device',
-                    'phone', 'info4',
-                    'name',
-                    'status', 'info5',
-                    'gender', 'goal', 'info6',
-                    'frustration', 'info7',
-                    'degree', 'info8',
-                    'collegeName', 'city', 'age',
-                    'salary', 'info9',
+                // Determine which variation of the form to present (short, medium or long).
+                // A query string parameter `variant` can be supplied to pick between
+                // `short`, `medium` and `long`.  The default is the full `long` form.
+                const params = new URLSearchParams(window.location.search);
+                const variant = (params.get('variant') || 'long').toLowerCase();
+                // Define priority-based orders for each variation.  The short form keeps only
+                // the highest‑priority questions after capturing basic contact details.  The medium
+                // form includes the high‑priority questions plus a second tier (program duration,
+                // enrolment timeline and college).  The long form retains all screens but
+                // reorders them so that the priority questions appear early in the flow.
+                const orderShort = [
+                    'start',
+                    'phone', 'name',
+                    'status', 'gender', 'age', 'city', 'degree',
                     'budget',
-                    'enrollTimeline',
+                    // include original filler screens
+                    'info2',
+                    'info5',
+                    'info6', // program preference: "Which program are you interested in?"
                     'final'
                 ];
-                quizFlow.sort((a, b) => order.indexOf(a.id || a.id) - order.indexOf(b.id || b.id));
+                const orderMedium = [
+                    'start',
+                    'phone', 'name',
+                    'status', 'gender', 'age', 'city', 'degree',
+                    'budget',
+                    // include original filler screens
+                    'info2',
+                    'info5',
+                    'info6',
+                    // second priority screens
+                    'programDuration',
+                    'enrollTimeline',
+                    'collegeName',
+                    'final'
+                ];
+                const orderLong = [
+                    'start',
+                    // nurture screen emphasising credibility
+                    'info1',
+                    'phone', 'name',
+                    // high‑priority questions
+                    'status', 'gender', 'age', 'city', 'degree',
+                    'budget',
+                    'info6',
+                    // second priority screens
+                    'programDuration',
+                    'enrollTimeline',
+                    'collegeName',
+                    // tertiary questions and information screens
+                    'goal', 'frustration',
+                    'timeCommitment',
+                    'importantFeatures',
+                    'device',
+                    'salary',
+                    'info2', 'info3', 'info4', 'info5', 'info7', 'info8', 'info9',
+                    'final'
+                ];
+                let order = orderLong;
+                if (variant === 'short') {
+                    order = orderShort;
+                } else if (variant === 'medium') {
+                    order = orderMedium;
+                }
+                // If using the short or medium variants, remove any screens that are not in the selected order.
+                if (variant !== 'long') {
+                    const allowed = new Set(order);
+                    quizFlow = quizFlow.filter(item => allowed.has(item.id));
+                }
+                // Sort the screens according to the computed order.  Unrecognised ids are moved to the end.
+                quizFlow.sort((a, b) => {
+                    const aIndex = order.indexOf(a.id);
+                    const bIndex = order.indexOf(b.id);
+                    return aIndex - bIndex;
+                });
             }
 
             let currentScreenIndex = 0;
@@ -870,6 +924,37 @@
                 }, 1000);
             }
 
+            // Render a thank-you screen inside the quiz container instead of replacing the entire document body.
+            // This is used when the final email screen is submitted to ensure a visible transition without relying on
+            // full-page rewrites or external redirects, which may not work consistently in some environments.
+            const showInlineThankYou = () => {
+                // Hide progress bar and back button
+                document.getElementById('progress-section').classList.add('hidden');
+                document.getElementById('backBtn').classList.add('hidden');
+                const name = formData.name ? formData.name.split(' ')[0] : 'Congratulations';
+                // Compose quick wins summary
+                const quickGoal = formData.goal ? formData.goal.join(', ') : 'Achieve your goals';
+                const quickFrustration = formData.frustration ? (Array.isArray(formData.frustration) ? formData.frustration[0] : formData.frustration) : 'Overcome challenges';
+                // Build thank-you content
+                const thankHTML = `<div class="w-full h-full flex flex-col items-center justify-center text-center p-4">
+                    <div class="text-green-500 mb-4">
+                        <svg class="w-20 h-20 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.207a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-4xl font-extrabold">Thank You, ${name}!</h2>
+                    <p class="text-gray-600 text-lg max-w-md mt-2">Your personalized Action Plan is on its way. A career advisor will be in touch shortly!</p>
+                    <div class="mt-6 bg-gray-100 p-4 rounded-lg w-full max-w-sm">
+                        <h3 class="font-bold text-lg mb-2">Quick Wins for You:</h3>
+                        <ul class="text-left space-y-1 text-sm">
+                            <li><span class="font-semibold">Goal: ${quickGoal}</span> - Update your LinkedIn headline to reflect this ambition.</li>
+                            <li><span class="font-semibold">Frustration: ${quickFrustration}</span> - Watch a free WorkSkills webinar on this topic this week.</li>
+                        </ul>
+                    </div>
+                </div>`;
+                screensContainer.innerHTML = thankHTML;
+            };
+
             const renderScreen = () => {
                 screensContainer.innerHTML = '';
                 const screenData = quizFlow[currentScreenIndex];
@@ -917,11 +1002,67 @@
                     case 'hook':
                         content = `<div class="text-center p-2 flex flex-col items-center justify-center stagger-1"><h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">${title}</h2><p class="text-gray-600 mt-2 text-base md:text-lg stagger-2">${screenData.text || ''}</p><div class="my-6 max-w-sm w-full stagger-2">${screenData.visual}</div><button class="form-submit-btn bg-[var(--brand-primary)] text-white font-bold py-4 px-12 rounded-xl shadow-lg shadow-green-500/30 hover:bg-green-700 transition-all transform hover:scale-105 stagger-3">${screenData.cta}</button></div>`;
                         break;
-                    case 'text-input':
-                    case 'final':
-                        const fields = screenData.id ? [{ id: screenData.id, placeholder: screenData.placeholder, type: 'text', validation: screenData.validation }] : screenData.fields || [{ id: 'email', placeholder: 'Enter your email', type: 'email', validation: screenData.validation }];
-                        content = `<div class="text-center p-2 flex flex-col items-center justify-center stagger-1"><h2 class="text-3xl font-extrabold leading-tight">${title}</h2><p class="text-gray-600 mt-2 text-base md:text-lg stagger-2">${screenData.subtext || ''}</p><div class="mt-8 space-y-2 w-full max-w-sm mx-auto stagger-3">${fields.map(field => `<div><input type="${field.type}" id="${field.id}" autocomplete="${field.id === 'name' ? 'name' : field.id === 'phone' ? 'tel' : field.id === 'email' ? 'email' : ''}" class="w-full p-4 border-2 rounded-lg text-lg ws-input" placeholder="${field.placeholder}" value="${formData[field.id] || localStorage.getItem(field.id) || ''}"><p id="${field.id}-error" class="text-red-500 text-sm text-left h-4"></p></div>`).join('')}</div><button class="form-submit-btn mt-6 bg-[var(--brand-primary)] text-white font-bold py-4 px-12 rounded-xl shadow-lg shadow-green-500/30 hover:bg-green-700 transition-all transform hover:scale-105 disabled:opacity-50 stagger-3">${screenData.cta}</button></div>`;
+                    case 'text-input': {
+                        // For plain text-input screens (name, phone, etc.), honour any provided fields array.
+                        const fields = screenData.fields || [{
+                            id: screenData.id,
+                            placeholder: screenData.placeholder,
+                            // Use appropriate input types based on the field id
+                            type: (screenData.id === 'phone') ? 'tel' : (screenData.id === 'email') ? 'email' : 'text',
+                            validation: screenData.validation
+                        }];
+                        content = `<div class="text-center p-2 flex flex-col items-center justify-center stagger-1">
+    <h2 class="text-3xl font-extrabold leading-tight">${title}</h2>
+    <p class="text-gray-600 mt-2 text-base md:text-lg stagger-2">${screenData.subtext || ''}</p>
+    <div class="mt-8 space-y-2 w-full max-w-sm mx-auto stagger-3">
+        ${fields.map(field => `
+        <div>
+            <input type="${field.type}" id="${field.id}"
+                autocomplete="${field.id === 'name' ? 'name' : field.id === 'phone' ? 'tel' : field.id === 'email' ? 'email' : ''}"
+                class="w-full p-4 border-2 rounded-lg text-lg ws-input"
+                placeholder="${field.placeholder}"
+                value="${formData[field.id] || localStorage.getItem(field.id) || ''}">
+            <p id="${field.id}-error" class="text-red-500 text-sm text-left h-4"></p>
+        </div>
+        `).join('')}
+    </div>
+    <button class="form-submit-btn mt-6 bg-[var(--brand-primary)] text-white font-bold py-4 px-12 rounded-xl shadow-lg shadow-green-500/30 hover:bg-green-700 transition-all transform hover:scale-105 disabled:opacity-50 stagger-3">${screenData.cta}</button>
+</div>`;
                         break;
+                    }
+                    case 'final': {
+                        // Final screen: collect email with an enhanced card UI.  Always respect the fields array if provided.
+                        const fields = screenData.fields || [{
+                            id: 'email',
+                            placeholder: 'Enter your email',
+                            type: 'email',
+                            validation: screenData.validation
+                        }];
+                        content = `<div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 max-w-md w-full mx-auto flex flex-col items-center text-center space-y-4 stagger-1">
+    <div class="text-green-500 stagger-1">
+        <!-- Envelope icon to symbolise email capture -->
+        <svg class="w-14 h-14 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M2.25 4.5A2.25 2.25 0 014.5 2.25h15a2.25 2.25 0 012.25 2.25v15a2.25 2.25 0 01-2.25 2.25h-15A2.25 2.25 0 012.25 19.5V4.5zM3 5.621V19.5a.75.75 0 00.75.75h15a.75.75 0 00.75-.75V5.62L12 12 3 5.621zM4.383 4.5L12 9.879l7.617-5.379H4.383z"></path>
+        </svg>
+    </div>
+    <h2 class="text-3xl font-extrabold">${title}</h2>
+    <p class="text-gray-600 text-base md:text-lg">${screenData.subtext || ''}</p>
+    <div class="w-full mt-4 space-y-2">
+        ${fields.map(field => `
+        <div>
+            <input type="${field.type}" id="${field.id}"
+                autocomplete="${field.id === 'email' ? 'email' : ''}"
+                class="w-full p-4 border-2 rounded-lg text-lg ws-input"
+                placeholder="${field.placeholder}"
+                value="${formData[field.id] || localStorage.getItem(field.id) || ''}">
+            <p id="${field.id}-error" class="text-red-500 text-sm text-left h-4"></p>
+        </div>
+        `).join('')}
+    </div>
+    <button class="form-submit-btn mt-4 bg-[var(--brand-primary)] text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-green-500/30 hover:bg-green-700 transition-all transform hover:scale-105 disabled:opacity-50">${screenData.cta}</button>
+</div>`;
+                        break;
+                    }
                     case 'dropdown':
                         // Render a dropdown with a Next button. Users must explicitly click Next to proceed.
                         content = `<div class="text-center p-6 sm:p-8 flex flex-col justify-center w-full max-w-md mx-auto stagger-1">
@@ -962,11 +1103,18 @@
             const addEventListeners = () => {
                 const screenData = quizFlow[currentScreenIndex];
                 if (screenData.type === 'visual-mcq') {
-                    document.querySelectorAll('.option-card').forEach(card => card.addEventListener('click', () => {
-                        formData[screenData.id] = card.dataset.value;
-                        // Shorter delay for snappier single-choice interaction
-                        setTimeout(() => navigate(1), 100);
-                    }));
+                    // Single-choice questions: highlight the selected card and delay navigation
+                    document.querySelectorAll('.option-card').forEach(card => {
+                        card.addEventListener('click', () => {
+                            formData[screenData.id] = card.dataset.value;
+                            // Remove any previous selections on the same screen
+                            document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                            // Apply the selected state to the clicked card
+                            card.classList.add('selected');
+                            // Wait briefly so the user can see the selection change before moving on
+                            setTimeout(() => navigate(1), 300);
+                        });
+                    });
                 } else if (screenData.type === 'visual-mcq-multi') {
                     // Multi-select interactions: allow multiple selections (up to the defined limit) without auto-advancing.
                     formData[screenData.id] = formData[screenData.id] || [];
@@ -1013,7 +1161,18 @@
                     document.querySelector('.form-submit-btn').addEventListener('click', () => navigate(1));
                 } else if (screenData.type === 'text-input' || screenData.type === 'final') {
                     const button = document.querySelector('.form-submit-btn');
-                    const fields = screenData.id ? [{ id: screenData.id, validation: screenData.validation }] : screenData.fields || [{ id: 'email', placeholder: 'Enter your E-Mail', type: 'email', validation: screenData.validation }];
+                    // For final screens we always rely on the provided fields array (e.g., the email field).  Using
+                    // screenData.id ("final") as a field id would not correspond to any actual input element,
+                    // resulting in missing listeners and broken validation.  For text-input screens, if a fields
+                    // array isn't supplied we fall back to a single field based on the screen id.
+                    let fields;
+                    if (screenData.type === 'final') {
+                        fields = screenData.fields || [{ id: 'email', placeholder: 'Enter your email', type: 'email', validation: screenData.validation }];
+                    } else if (screenData.id) {
+                        fields = [{ id: screenData.id, validation: screenData.validation }];
+                    } else {
+                        fields = screenData.fields || [{ id: 'email', placeholder: 'Enter your email', type: 'email', validation: screenData.validation }];
+                    }
                     const inputs = fields.map(f => document.getElementById(f.id));
 
                     const validateField = (input, validation) => {
@@ -1049,7 +1208,32 @@
                             validateAll();
                         });
                     });
-                    button.addEventListener('click', () => navigate(1));
+                    // For standard text-input screens, clicking the CTA should advance normally.  For the
+                    // final email capture screen, persist the captured field and then trigger the
+                    // built‑in thank‑you routine so that the data is submitted and the user is redirected.
+                    button.addEventListener('click', () => {
+                        // Persist the entered values
+                        inputs.forEach((input, i) => {
+                            formData[input.id] = input.value;
+                            try {
+                                localStorage.setItem(input.id, input.value);
+                            } catch (e) {
+                                console.warn('Unable to store field value', e);
+                            }
+                        });
+                        if (screenData.type === 'final') {
+                            // Copy the entered email into the legacy 'final' field to maintain backward
+                            // compatibility with existing data schemas.  This ensures that downstream
+                            // integrations expecting a value in the 'final' column still receive the email.
+                            if (formData.email) {
+                                formData.final = formData.email;
+                            }
+                            // Show the full thank‑you screen, which also submits the data and redirects
+                            renderThankYou();
+                        } else {
+                            navigate(1);
+                        }
+                    });
                     validateAll();
                 } else if (screenData.type === 'dual-slider') {
                     document.querySelector('.form-submit-btn').addEventListener('click', () => navigate(1));
@@ -1170,6 +1354,10 @@
                 token: SHEET_TOKEN,
                 session_id: '', // Will be set by caller
                 name: data.name,
+                // Capture the email provided on the final screen.  Support both the new 'email' key and the
+                // legacy 'final' key for backward compatibility.  If data.email is empty or undefined,
+                // fall back to data.final so the email is still captured for older flows.
+                email: data.email || data.final,
                 phone: data.phone,
                 final: data.final,
                 status: data.status,

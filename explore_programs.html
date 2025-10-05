@@ -4,21 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workskills - Placements Page</title>
-  <link rel="stylesheet" href="./css/common.css" />
-  <link rel="stylesheet" href="./css/placements.css">
+  <title>Workskills - Explore Programs</title>
+  
   <link rel="shortcut icon" href="images/common/favicon.svg" type="image/x-icon">
-
-
+  <link rel="stylesheet" href="./css/explore_programs.css" />
+  <link rel="stylesheet" href="./css/common.css">
   <style>
-    /* Simple lazy loading styles */
-    .lazy-load {
-      background-color: #f3f4f6;
-    }
-
-    .lazy-load.error {
-      background-color: #fef2f2;
-    }
+    /* Video Player Styles */
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -105,15 +97,15 @@
             <img src="images/common/workskills_black.svg" alt="Workskills" />
           </div>
           <div class="explore-programs-dropdown">
-            <a href="explore_programs.html" class="explore-programs-btn">
+            <!-- <button class="explore-programs-btn">
               Explore Programs
-              <!-- <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 6L8 10L12 6" stroke="white" stroke-width="1.5" stroke-linecap="round"
                   stroke-linejoin="round" />
-              </svg> -->
-            </a>
+              </svg>
+            </button> -->
 
-            <!-- <div class="dropdown-menu desktop-dropdown">
+            <div class="dropdown-menu desktop-dropdown">
               <div class="dropdown-item">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path
@@ -142,7 +134,7 @@
                 </svg>
                 <span>BrandEngine 3.0</span>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
 
@@ -153,13 +145,13 @@
           <a href="./about-us.html" class="nav-link">About Us</a>
         </div>
 
-        <a href="explore_programs.html" class="nav-mobile-program-btn">
+        <!-- <a href="#programs_section" class="nav-mobile-program-btn">
           <span>Programs</span>
-          <!-- <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg" style="margin-left: 6px">
             <path d="M6 9l6 6 6-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg> -->
-        </a>
+          </svg>
+        </a> -->
 
         <div class="navbar-mobile-toggle">
 
@@ -218,136 +210,128 @@
     </div>
   </div>
 
-  <!-- placements-section -->
-  <div class="container placements-section">
-    <div class="placements-1">
-      <div class="left">
-        <div class="item-1">
-          <h1>Placements at Workskills</h1>
+
+  <!-- programs-section -->
+  <div class="container programs-section" id="programs_section">
+    <div class="programs-header">
+      <h2>EXPLORE CAREER PATHS</h2>
+      <h1>Programs from industry experts</h1>
+    </div>
+
+    <div class="programs-cards">
+      <div class="program-card">
+        <div class="program-header">
+          <div class="program-image">
+            <img src="images/home/Gen Al & Prompt Engineering Certification-min.png" alt="Data Analytics Student" />
+          </div>
         </div>
-        <div class="item-2">
-          <p>
-            We're proud to educate the next-gen Marketers, Creators, Writers,
-            & Designers
-          </p>
-        </div>
-        <div class="item-3">
-          <div class="subitem subitem-1">
-            <img src="images/common/student.svg" alt="" />
-            <div>
-              <h3>150+ Companies</h3>
-              <p>Hired Our Students</p>
+
+
+        <div class="program-card-content">
+          <div class="program-tags">
+            <span class="tag audience-tag">50+ AI Tools Covered</span>
+            <span class="tag eligibility-tag">Learn A-Z of Gen AI</span>
+          </div>
+  
+          <div class="program-title">
+            <h3>Gen AI & Prompt Engineering Certification</h3>
+          </div>
+  
+  
+  
+          <div class="program-feature">
+            <div class="program-feature-left">
+              <h5>Program Fees Starts</h5>
+              <p>₹14,999/-</p>
+            </div>
+            <div class="program-feature-right">
+              <h5>🔥</h5>
+              <p>4 Weeks <br />Online & Offline</p>
             </div>
           </div>
-          <div class="subitem subitem-1">
-            <img src="images/common/package.svg" alt="" />
-            <div>
-              <h3>8 Lac Per Annum</h3>
-              <p>Average Package</p>
-            </div>
-          </div>
-          <div class="subitem subitem-1">
-            <img src="images/common/growth.svg" alt="" />
-            <div>
-              <h3>90% Students Placed</h3>
-            </div>
+  
+          <div class="program-buttons">
+            <button class="btn-primary" onclick="window.location.href=`https://wa.link/qvb3n2`" >Request Callback</button>
+            <button class="btn-secondary" onclick="window.location.href=`https://wa.link/qvb3n2`">Explore Details</button>
           </div>
         </div>
       </div>
-      <div class="right">
-        <img src="images/placements/placements_desktop.png" alt="" />
+      <div class="program-card">
+        <div class="program-header">
+          <div class="program-image">
+            <img src="images/home/Al Powered Marketing  Internship + Job Program-min.png" alt="Data Analytics Student" />
+          </div>
+        </div>
+
+
+        <div class="program-card-content">
+          <div class="program-tags">
+            <span class="tag audience-tag" style="background: #EEF4FF; color: #3538CD">In-Built Paid Internship</span>
+            <span class="tag eligibility-tag" style="background: #fef2f2; color: #dc2626">100% Job Assistance</span>
+          </div>
+  
+          <div class="program-title">
+            <h3>AI Powered Marketing <br/> Internship + Job Program</h3>
+          </div>
+  
+  
+  
+          <div class="program-feature">
+            <div class="program-feature-left">
+              <h5>Program Fees Starts</h5>
+              <p>₹55,000/-</p>
+            </div>
+            <div class="program-feature-right">
+              <h5>🔥</h5>
+              <p>16 Weeks <br />Online & Offline</p>
+            </div>
+          </div>
+  
+          <div class="program-buttons">
+            <button class="btn-primary" onclick="window.location.href=`https://wa.link/qvb3n2`">Request Callback</button>
+            <button class="btn-secondary" onclick="window.location.href=`https://wa.link/qvb3n2`">Explore Details</button>
+          </div>
+        </div>
       </div>
-      <!-- <img class="img-desktop" src="images/common/public_1.jpg" alt=""> -->
-    </div>
-  </div>
-
-
-  <!-- placed-students-section -->
-  <div class="container placed-students-section">
-    <!-- <div class="placed-students-header">
-      <h1>Meet Our Placed Students</h1>
-      <p>Discover success stories from our students who have transformed their careers</p>
-    </div> -->
-
-    <div class="filters-container">
-      <div class="filter-row">
-        <span class="filter-label">Filter by :</span>
-        <div class="filter-dropdowns">
-          <div class="filter-dropdown">
-            <select id="graduationYearFilter" class="filter-select">
-              <option value="">Year of Graduation</option>
-              <option value="2024">2024</option>
-              <option value="2023">2023</option>
-              <option value="2022">2022</option>
-              <option value="2021">2021</option>
-              <option value="2020">2020</option>
-              <option value="2019">2019</option>
-              <option value="2018">2018</option>
-              <option value="2017">2017</option>
-            </select>
+      <div class="program-card">
+        <div class="program-header">
+          <div class="program-image">
+            <img src="images/home/Data Analytics with Gen Al_ IIT & Microsoft Certification-min.png" alt="Data Analytics Student" />
           </div>
-          <div class="filter-dropdown">
-            <select id="degreeFilter" class="filter-select">
-              <option value="">Degree</option>
-              <option value="B.Tech">B.Tech</option>
-              <option value="BE">BE</option>
-              <option value="BCA">BCA</option>
-              <option value="B.Com">B.Com</option>
-              <option value="BA">BA</option>
-              <option value="B.Sc">B.Sc</option>
-              <option value="BS">BS</option>
-              <option value="M.Tech">M.Tech</option>
-              <option value="M.Sc">M.Sc</option>
-              <option value="MBA">MBA</option>
-              <option value="MCA">MCA</option>
-              <option value="Other">Other</option>
-            </select>
+        </div>
+
+
+        <div class="program-card-content">
+          <div class="program-tags">
+            <span class="tag audience-tag" style="background: #FDF2FA; color: #C11574">Fully Online Program</span>
+            <span class="tag eligibility-tag" style="background: #FFFAEB; color: #B54708">Earn IIT Alumni Signed Certification</span>
           </div>
-          <div class="filter-dropdown">
-            <select id="branchFilter" class="filter-select">
-              <option value="">Branch</option>
-              <option value="IT">IT</option>
-              <option value="Non-IT">Non-IT</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Non-Engineering">Non-Engineering</option>
-            </select>
+  
+          <div class="program-title">
+            <h3>Data Analytics with Gen Al: IIT & Microsoft Certification</h3>
+          </div>
+  
+  
+  
+          <div class="program-feature">
+            <div class="program-feature-left">
+              <h5>Program Fees Starts</h5>
+              <p>₹35,000/-</p>
+            </div>
+            <div class="program-feature-right">
+              <h5>🔥</h5>
+              <p>16 Weeks <br />Online only</p>
+            </div>
+          </div>
+  
+          <div class="program-buttons">
+            <button class="btn-primary" onclick="window.location.href=`https://wa.link/qvb3n2`">Request Callback</button>
+            <button class="btn-secondary" onclick="window.location.href=`https://wa.link/qvb3n2`">Explore Details</button>
           </div>
         </div>
       </div>
 
-      <div class="category-filters">
-        <button class="category-btn active" data-category="All">All</button>
-        <button class="category-btn" data-category="Non IT Branch to IT Branch">Non IT Branch to IT Branch</button>
-        <button class="category-btn" data-category="Non-Engineering Degree">Non-Engineering Degree</button>
-        <button class="category-btn" data-category="Career Gap">Career Gap</button>
-        <button class="category-btn" data-category="Got into Top MNCs">Got into Top MNCs</button>
-        <button class="category-btn" data-category="Non IT to IT Job">Non IT to IT Job</button>
-        <button class="category-btn" data-category="Women in Tech">Women in Tech</button>
-      </div>
-    </div>
 
-    <div class="students-grid" id="studentsGrid">
-      <!-- Students will be populated by JavaScript -->
-    </div>
-
-    <div class="load-more-container">
-      <button id="loadMoreBtn" class="load-more-btn">View More</button>
-    </div>
-  </div>
-
-
-  <!-- book-session-section -->
-  <div class="container book-session-section">
-    <div class="book-session-content">
-      <div class="book-session-1">
-        <h1>Book a 30-minutes 1:1 session with a placed student</h1>
-        <p>Book a free 30-minute 1:1 session and get honest answers on how they learned, built projects, and got placed.
-        </p>
-        <button>Book 1:1 Session</button>
-      </div>
-      <div class="book-session-2">
-        <img src="images/placements/book_call.png" alt="">
-      </div>
     </div>
   </div>
 
@@ -381,7 +365,7 @@
         <div class="social">
           <a href="https://www.instagram.com/workskills.in/"><img style="margin-top: 3px" src="images/common/insta.svg"
               alt=""></a>
-          <a href="https://in.linkedin.com/company/workskills-co-in"><img style="display: block;"
+                      <a href="https://in.linkedin.com/company/workskills-co-in"><img style="display: block;"
               src="images/common/linkedin.svg" alt=""></a>
         </div>
       </div>
@@ -447,7 +431,7 @@
         </div>
       </div>
       <div class="cta-buttons">
-        <button class="cta-apply-now">Apply Now</button>
+        <button class="cta-apply-now" onclick="window.location.href=`https://wa.link/qvb3n2`">Apply Now</button>
         <a href="https://wa.link/qvb3n2"><button class="cta-download-syllabus">
             <img src="images/common/whatsapp.png" /> Whatsapp
           </button></a>
@@ -457,228 +441,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-  <script>
-    let allStudents = [];
-    let filteredStudents = [];
-    let currentPage = 0;
-    const studentsPerPage = 12;
-
-    // Lazy loading functionality
-    let imageObserver;
-
-    // Initialize lazy loading observer
-    function initLazyLoading() {
-      if ('IntersectionObserver' in window) {
-        imageObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const img = entry.target;
-              const src = img.getAttribute('data-src');
-
-              if (src) {
-                // Simply set the src when image enters viewport
-                img.src = src;
-                img.onerror = function () {
-                  img.classList.add('error');
-                  // Set a placeholder or default image
-                  img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0yMCAxMEMxNy43OTEgMTAgMTYgMTEuNzkxIDE2IDE0QzE2IDE2LjIwOSAxNy43OTEgMTggMjAgMThDMjIuMjA5IDE4IDI0IDE2LjIwOSAyNCAxNEMyNCAxMS43OTEgMjIuMjA5IDEwIDIwIDEwWiIgZmlsbD0iIzlDQTNBRiIvPgo8cGF0aCBkPSJNMjAgMjBDMTYuNjg2IDIwIDE0IDE3LjMxNCAxNCAxNEgxNkMxNiAxNi4yMDkgMTcuNzkxIDE4IDIwIDE4QzIyLjIwOSAxOCAyNCAxNi4yMDkgMjQgMTRIMjZDMjYgMTcuMzE0IDIzLjMxNCAyMCAyMCAyMFoiIGZpbGw9IiM5Q0EzQUYiLz4KPC9zdmc+';
-                };
-
-                observer.unobserve(img);
-              }
-            }
-          });
-        }, {
-          root: null,
-          rootMargin: '50px',
-          threshold: 0.1
-        });
-      }
-    }
-
-    // Observe images for lazy loading
-    function observeImages() {
-      const lazyImages = document.querySelectorAll('.lazy-load');
-      lazyImages.forEach(img => {
-        if (imageObserver) {
-          imageObserver.observe(img);
-        } else {
-          // Fallback for browsers without IntersectionObserver
-          const src = img.getAttribute('data-src');
-          if (src) {
-            img.src = src;
-          }
-        }
-      });
-    }
-
-    // Initialize the application
-    async function loadPlacements() {
-      try {
-        // Initialize lazy loading
-        initLazyLoading();
-
-        const response = await fetch('data/placements_data.json');
-        allStudents = await response.json();
-
-        // Initialize filtered students with all students
-        filteredStudents = [...allStudents];
-
-        // Render initial batch of students
-        renderStudents();
-
-        // Setup event listeners
-        setupEventListeners();
-
-        console.log('Loaded', allStudents.length, 'students');
-      } catch (error) {
-        console.error('Error loading placements:', error);
-        document.getElementById('studentsGrid').innerHTML = '<p>Error loading student data. Please try again later.</p>';
-      }
-    }
-
-    // Create student card HTML
-    function createStudentCard(student, index) {
-      const categories = student.Category ? student.Category.split(', ') : [];
-      const highlightCategories = ['Got into Top MNCs', 'Women in Tech', 'Non IT to IT Job'];
-
-      // Generate consistent placeholder images based on student data
-      const avatarSeed = student.Name.replace(/\s+/g, '').toLowerCase();
-      const companySeed = student.NewCompanyName.replace(/\s+/g, '').toLowerCase();
-
-      // Use different image services for variety
-      const avatarUrl = `images/placements/placements_students/${student.Name.toLowerCase()}.jpg`;
-      const companyUrl = `images/placements/company_logo/${student.NewCompanyName}.png`;
-
-      return `
-        <div class="student-card" onclick="window.open('${student.LinkedInUrl}', '_blank')">
-          <div class="student-card-header">
-            <img data-src="${avatarUrl}" alt="${student.Name}" class="student-avatar lazy-load">
-            <div class="student-info">
-              <h3>${student.Name}</h3>
-              <p class="student-degree">${student.Degree} → ${student.NewCompanyPosition}</p>
-              <div class="company-info">
-                <img data-src="${companyUrl}" alt="${student.NewCompanyName}" class="company-logo lazy-load">
-                </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    // Render students to the grid
-    function renderStudents(reset = false) {
-      const grid = document.getElementById('studentsGrid');
-      const loadMoreBtn = document.getElementById('loadMoreBtn');
-
-      if (reset) {
-        grid.innerHTML = '';
-        currentPage = 0;
-      }
-
-      const startIndex = currentPage * studentsPerPage;
-      const endIndex = startIndex + studentsPerPage;
-      const studentsToShow = filteredStudents.slice(startIndex, endIndex);
-
-      if (studentsToShow.length === 0 && currentPage === 0) {
-        grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #667085;">No students found matching your filters.</div>';
-        loadMoreBtn.style.display = 'none';
-        return;
-      }
-
-      const studentsHTML = studentsToShow.map((student, index) => createStudentCard(student, startIndex + index)).join('');
-
-      if (reset) {
-        grid.innerHTML = studentsHTML;
-      } else {
-        grid.innerHTML += studentsHTML;
-      }
-
-      currentPage++;
-
-      // Observe new images for lazy loading
-      observeImages();
-
-      // Show/hide load more button
-      if (endIndex >= filteredStudents.length) {
-        loadMoreBtn.style.display = 'none';
-      } else {
-        loadMoreBtn.style.display = 'block';
-      }
-    }
-
-    // Filter students based on current filter values
-    function applyFilters() {
-      const graduationYear = document.getElementById('graduationYearFilter').value;
-      const degree = document.getElementById('degreeFilter').value;
-      const branch = document.getElementById('branchFilter').value;
-      const activeCategory = document.querySelector('.category-btn.active').dataset.category;
-
-      filteredStudents = allStudents.filter(student => {
-        // Year filter
-        if (graduationYear && student.GraduationYear != graduationYear) {
-          return false;
-        }
-
-        // Degree filter
-        if (degree && student.Degree !== degree) {
-          return false;
-        }
-
-        // Branch filter (simplified logic)
-        if (branch) {
-          const isEngineering = ['B.Tech', 'BE', 'M.Tech'].includes(student.Degree);
-          const isIT = student.Category && student.Category.includes('IT');
-
-          if (branch === 'Engineering' && !isEngineering) return false;
-          if (branch === 'Non-Engineering' && isEngineering) return false;
-          if (branch === 'IT' && !isIT) return false;
-          if (branch === 'Non-IT' && isIT) return false;
-        }
-
-        // Category filter
-        if (activeCategory !== 'All') {
-          if (!student.Category || !student.Category.includes(activeCategory)) {
-            return false;
-          }
-        }
-
-        return true;
-      });
-
-      renderStudents(true);
-    }
-
-    // Setup event listeners
-    function setupEventListeners() {
-      // Dropdown filters
-      document.getElementById('graduationYearFilter').addEventListener('change', applyFilters);
-      document.getElementById('degreeFilter').addEventListener('change', applyFilters);
-      document.getElementById('branchFilter').addEventListener('change', applyFilters);
-
-      // Category buttons
-      document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-          // Remove active class from all buttons
-          document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-
-          // Add active class to clicked button
-          this.classList.add('active');
-
-          // Apply filters
-          applyFilters();
-        });
-      });
-
-      // Load more button
-      document.getElementById('loadMoreBtn').addEventListener('click', function () {
-        renderStudents();
-      });
-    }
-
-    // Call the function to initialize
-    loadPlacements();
-  </script>
 
 </body>
 

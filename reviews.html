@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./common.css" />
-    <link rel="stylesheet" href="./reviews.css">
+    <title>Workskills - Reviews Page</title>
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/reviews.css">
+    <link rel="shortcut icon" href="images/common/favicon.svg" type="image/x-icon">
+
     <!-- Meta Pixel Code -->
     <script>
         !(function (f, b, e, v, n, t, s) {
@@ -92,16 +94,16 @@
                         <img src="images/common/workskills_black.svg" alt="Workskills" />
                     </div>
                     <div class="explore-programs-dropdown">
-                        <button class="explore-programs-btn">
+                        <a href="explore_programs.html" class="explore-programs-btn">
                             Explore Programs
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                            <!-- <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 6L8 10L12 6" stroke="white" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
-                            </svg>
-                        </button>
+                            </svg> -->
+                        </a>
 
-                        <div class="dropdown-menu desktop-dropdown">
+                        <!-- <div class="dropdown-menu desktop-dropdown">
                             <div class="dropdown-item">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none">
@@ -132,7 +134,7 @@
                                 </svg>
                                 <span>BrandEngine 3.0</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -143,13 +145,13 @@
                     <a href="./about-us.html" class="nav-link">About Us</a>
                 </div>
 
-                <a href="#programs_section" class="nav-mobile-program-btn">
+                <a href="explore_programs.html" class="nav-mobile-program-btn">
                     <span>Programs</span>
-                    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    <!-- <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg" style="margin-left: 6px">
                         <path d="M6 9l6 6 6-6" stroke="#fff" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round"></path>
-                    </svg>
+                    </svg> -->
                 </a>
 
                 <div class="navbar-mobile-toggle">
@@ -237,7 +239,7 @@
     </div>
 
     <!-- reviews-section -->
-     <div class="container reviews-section">
+    <div class="container reviews-section">
         <div class="company-details">
             <div class="company-logo">
                 <img src="images/common/Subtract.svg" alt="">
@@ -259,7 +261,7 @@
                 </div>
             </div>
         </div>
-     </div>
+    </div>
 
     <!-- reviews listing section -->
     <div class="container reviews-listing-section">
@@ -347,37 +349,43 @@
                 <div class="filter-buttons">
                     <button class="filter-btn active" data-sort="most-relevant">
                         <svg class="check-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         Most Relevant
                     </button>
                     <button class="filter-btn" data-sort="newest">
                         <svg class="check-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         Newest
                     </button>
                     <button class="filter-btn" data-sort="highest">
                         <svg class="check-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         Highest
                     </button>
                     <button class="filter-btn" data-sort="lowest">
                         <svg class="check-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         Lowest
                     </button>
                     <button class="filter-btn" data-sort="data-analytics">
                         <svg class="check-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         Data Analytics
                     </button>
                     <button class="filter-btn" data-sort="digital-marketing">
                         <svg class="check-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         Digital Marketing
                     </button>
@@ -514,21 +522,21 @@
         // Reviews functionality
         async function loadReviews() {
             try {
-                const response = await fetch('reviews.json');
+                const response = await fetch('data/reviews.json');
                 allReviews = await response.json();
-                
+
                 // Update platform counts
                 updatePlatformCounts();
-                
+
                 // Update review summary for default platform (Google)
                 updateReviewSummary(currentPlatform);
-                
+
                 // Initialize filtered reviews with Google reviews (default)
                 applyReviewFilters();
-                
+
                 // Setup reviews event listeners
                 setupReviewsEventListeners();
-                
+
                 console.log('Loaded', allReviews.length, 'reviews');
             } catch (error) {
                 console.error('Error loading reviews:', error);
@@ -561,7 +569,7 @@
         // Calculate rating statistics for a platform
         function calculateRatingStats(platform) {
             const platformReviews = allReviews.filter(review => review.source === platform);
-            
+
             if (platformReviews.length === 0) {
                 return {
                     totalReviews: 0,
@@ -602,7 +610,7 @@
             };
 
             // Update title
-            document.getElementById('platformSummaryTitle').textContent = 
+            document.getElementById('platformSummaryTitle').textContent =
                 `${platformNames[platform]} review summary`;
 
             // Update rating bars
@@ -613,14 +621,14 @@
             }
 
             // Update average rating
-            document.getElementById('averageRating').textContent = 
+            document.getElementById('averageRating').textContent =
                 stats.averageRating.toFixed(1);
 
             // Update star display
             updateStarDisplay(stats.averageRating);
 
             // Update total count
-            document.getElementById('totalReviewCount').textContent = 
+            document.getElementById('totalReviewCount').textContent =
                 `(${stats.totalReviews})`;
         }
 
@@ -628,10 +636,10 @@
         function updateStarDisplay(rating) {
             const starsContainer = document.getElementById('ratingStars');
             const stars = starsContainer.querySelectorAll('.star');
-            
+
             stars.forEach((star, index) => {
                 star.classList.remove('filled', 'half');
-                
+
                 if (rating >= index + 1) {
                     star.classList.add('filled');
                 } else if (rating >= index + 0.5) {
@@ -645,7 +653,7 @@
             const reviewerInitial = review.name.charAt(0).toUpperCase();
             const stars = generateStarRating(review.rating);
             const formattedDate = formatDate(review.date);
-            
+
             return `
                 <div class="review-card">
                     <div class="review-header">
@@ -735,20 +743,20 @@
         // Filter and sort reviews
         function applyReviewFilters() {
             const activeSort = document.querySelector('.filter-btn.active')?.dataset.sort || 'most-relevant';
-            
+
             // First filter by platform
             let platformFiltered = allReviews.filter(review => review.source === currentPlatform);
-            
+
             // Then filter by program type if specified
             filteredReviews = platformFiltered.filter(review => {
                 if (activeSort === 'data-analytics') {
-                    return review.subtitle.toLowerCase().includes('data analytics') || 
-                           review.subtitle.toLowerCase().includes('analytics') ||
-                           review.subtitle.toLowerCase().includes('machine learning');
+                    return review.subtitle.toLowerCase().includes('data analytics') ||
+                        review.subtitle.toLowerCase().includes('analytics') ||
+                        review.subtitle.toLowerCase().includes('machine learning');
                 }
                 if (activeSort === 'digital-marketing') {
-                    return review.subtitle.toLowerCase().includes('marketing') || 
-                           review.subtitle.toLowerCase().includes('business');
+                    return review.subtitle.toLowerCase().includes('marketing') ||
+                        review.subtitle.toLowerCase().includes('business');
                 }
                 return true; // Show all for other filters
             });
@@ -779,19 +787,19 @@
         function setupReviewsEventListeners() {
             // Platform filter buttons
             document.querySelectorAll('.platform-stat').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     // Remove active class from all platform buttons
                     document.querySelectorAll('.platform-stat').forEach(b => b.classList.remove('active'));
-                    
+
                     // Add active class to clicked button
                     this.classList.add('active');
-                    
+
                     // Update current platform
                     currentPlatform = this.dataset.platform;
-                    
+
                     // Update review summary for new platform
                     updateReviewSummary(currentPlatform);
-                    
+
                     // Apply filters
                     applyReviewFilters();
                 });
@@ -799,20 +807,20 @@
 
             // Sort/Filter buttons
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     // Remove active class from all buttons
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    
+
                     // Add active class to clicked button
                     this.classList.add('active');
-                    
+
                     // Apply filters
                     applyReviewFilters();
                 });
             });
 
             // Load more button
-            document.getElementById('loadMoreReviews').addEventListener('click', function() {
+            document.getElementById('loadMoreReviews').addEventListener('click', function () {
                 renderReviews();
             });
         }

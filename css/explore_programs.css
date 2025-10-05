@@ -1,0 +1,325 @@
+/* programs-section */
+
+.programs-header {
+    text-align: center;
+    margin-bottom: 64px;
+    margin-top: 30px;
+  }
+  
+  .programs-header h2 {
+    color: var(--Primary-700, #027948);
+    margin-bottom: 12px;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    letter-spacing: 1.92px;
+  }
+  
+  .programs-header h1 {
+    color: var(--Gray-900, #101828);
+    text-align: center;
+    font-family: Inter;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px; /* 122.222% */
+    letter-spacing: -0.72px;
+  }
+  
+  .programs-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+  }
+  
+  .program-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f2f4f7;
+    max-width: 391px;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .program-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+  
+  .program-header {
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .program-image {
+    position: relative;
+    /* top: -50px; */
+  }
+  
+  .program-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .program-logo span {
+    color: #48bf84;
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 28px;
+  }
+  
+  .program-image {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .program-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    /* border-radius: 12px; */
+  }
+  
+  .program-tags {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .tag {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    width: fit-content;
+  }
+  
+  .audience-tag {
+    background: #f4f3ff;
+    color: #5925DC;
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+  }
+  
+  .eligibility-tag {
+    background: #F0F9FF;
+    color: var(--Blue-light-700, #026AA2);
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+  }
+  
+  .batch-full-tag {
+    background: #fef2f2;
+    color: #dc2626;
+  }
+  
+  .program-title {
+    margin-bottom: 12px;
+  }
+  
+  .program-title h3 {
+    color: var(--Gray-900, #101828);
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; /* 145.455% */
+    letter-spacing: -0.22px;
+  }
+  
+  .program-status {
+    margin-bottom: 16px;
+  }
+  
+  .program-status p {
+    color: #027948;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+  
+  .program-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  
+  .program-feature-left h5{
+    color: #64748B;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15px; /* 125% */
+  }
+  
+  .program-feature-left p {
+    color: #1E293B;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+  }
+  
+  .program-feature-right {
+    display: flex;
+    gap: 5px;
+    p {
+      color: #183B56;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px; /* 142.857% */
+    }
+  }
+  
+  .program-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .btn-primary {
+    background: #48bf84;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1;
+  }
+  
+  .btn-primary:hover {
+    background: #3da876;
+  }
+  
+  .btn-secondary {
+    background: #fff;
+    color: #667085;
+    border: 1px solid #d0d5dd;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    flex: 1;
+  }
+  
+  .btn-secondary:hover {
+    border-color: #48bf84;
+  }
+  
+  .btn-waitlist {
+    background: #ecfdf3;
+    color: #027948;
+    border: 1px solid #48bf84;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  
+  .btn-waitlist:hover {
+    background: #d1fae5;
+  }
+  
+  .waitlist-text {
+    text-align: center;
+  }
+  
+  .waitlist-text p {
+    color: #6b7280;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+  }
+  
+  /* Batch full card specific styles */
+  .program-card.batch-full .program-status p {
+    color: #dc2626;
+  }
+  
+  .program-card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  /* Mobile responsive styles for programs section */
+  @media screen and (max-width: 768px) {  
+    .programs-header {
+      margin-bottom: 32px;
+    }
+    
+    .programs-header h2 {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 1.68px;
+    }
+    
+    .programs-header h1 {
+      font-size: 30px;
+      line-height: 38px;
+      letter-spacing: -0.6px;
+    }
+    
+    .programs-cards {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .program-card {
+      max-width: 100%;
+    }
+  
+    .program-card-content {
+      padding: 20px;
+    }
+    
+    .program-image img {
+      height: 180px;
+    }
+    
+    .program-buttons {
+      flex-direction: column;
+    }
+  }
